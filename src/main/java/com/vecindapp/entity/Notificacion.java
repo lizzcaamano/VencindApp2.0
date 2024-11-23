@@ -1,10 +1,14 @@
 package com.vecindapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,8 +37,9 @@ public class Notificacion {
     @Column(name = "fecha")
     private Instant fecha;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "notificacion")
-    private Set<Agenda> agenda = new LinkedHashSet<>();
+    private List<Agenda> agenda = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -84,12 +89,11 @@ public class Notificacion {
         this.fecha = fecha;
     }
 
-    public Set<Agenda> getAgenda() {
+    public List<Agenda> getAgenda() {
         return agenda;
     }
 
-    public void setAgenda(Set<Agenda> agenda) {
+    public void setAgenda(List<Agenda> agenda) {
         this.agenda = agenda;
     }
-
 }

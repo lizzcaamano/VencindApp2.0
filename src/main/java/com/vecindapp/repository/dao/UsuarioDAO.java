@@ -1,5 +1,6 @@
 package com.vecindapp.repository.dao;
 
+import com.vecindapp.entity.Calificacion;
 import com.vecindapp.entity.Usuario;
 import com.vecindapp.repository.jpa.IUsuarioJPA;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +15,20 @@ public class UsuarioDAO implements IUsuarioDAO{
     IUsuarioJPA usujpa;
 
     @Override
-    public Usuario findByID(int id) {
+    public Usuario findById(int id) {
+
         return usujpa.findById(id).orElse(null);
     }
 
     @Override
     public List<Usuario> ListUsuarios() {
+
         return usujpa.findAll();
     }
 
     @Override
     public Usuario insertUsuario(Usuario usuario) {
+
         return usujpa.save(usuario);
     }
 
@@ -40,13 +44,13 @@ public class UsuarioDAO implements IUsuarioDAO{
     }
 
     /*@Override
-    public List<Usuario> findByCalificacion(int calificacion) {
-        return usujpa.findByCalificacion(calificacion);
+    public List<Usuario> findByCalificacion(Calificacion calificaciones) {
+        return usujpa.findByCalificacion(calificaciones);
     }*/
 
     //TODO: pendiente crear actualizar por estado
-    //@Override
-    //public Usuario actualizarEstado(String estado) {
-        //return usujpa.actualizarEstado(estado);
-    //}
+    /*@Override
+    public Usuario updateByEstado(String estado) {
+        return usujpa.updateByEstado(estado);
+    }*/
 }

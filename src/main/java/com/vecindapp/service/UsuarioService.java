@@ -1,5 +1,6 @@
 package com.vecindapp.service;
 
+import com.vecindapp.entity.Calificacion;
 import com.vecindapp.entity.Usuario;
 import com.vecindapp.repository.dao.IUsuarioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,8 @@ public class UsuarioService implements IUsuarioService {
     IUsuarioDAO usudao;
 
     @Override
-    public Usuario findByID(int id) {
-        return usudao.findByID(id);
+    public Usuario findById(int id) {
+        return usudao.findById(id);
     }
 
     @Override
@@ -38,13 +39,13 @@ public class UsuarioService implements IUsuarioService {
         return usudao.findByNombre(nombre);
     }
 
-    /*@Override
-    public List<Usuario> findByCalificacion(int calificacion) {
-        return usudao.findByCalificacion(calificacion);
+   /* @Override
+    public List<Usuario> findByCalificacion(Calificacion calificaciones) {
+        return usudao.findByCalificacion(calificaciones);
     }*/
 
     /*@Override
-    public Usuario actualizarEstado(String estado) {
-        return usudao.actualizarEstado(estado);
+    public Usuario updateByEstado(String estado) {
+        return usudao.updateByEstado(estado);
     }*/
 }

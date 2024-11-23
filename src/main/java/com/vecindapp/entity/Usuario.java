@@ -41,7 +41,8 @@ public class Usuario {
     @Column(name = "estado")
     private String estado;
 
-    @JsonBackReference
+
+    @JsonManagedReference
     @OneToMany(mappedBy = "usuario")
     private List<Agenda> agenda = new ArrayList<>();
 
