@@ -56,7 +56,7 @@ public class Agenda {
         return usuario;
     }
 
-    public void setUser(Usuario user) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
@@ -68,13 +68,13 @@ public class Agenda {
         this.notificacion = notificacion;
     }
 
-    /*public String getEvento() {
+    public String getEvento() {
         return evento;
     }
 
     public void setEvento(String evento) {
         this.evento = evento;
-    }*/
+    }
 
     public Instant getFechaInicio() {
         return fechaInicio;
