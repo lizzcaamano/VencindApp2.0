@@ -14,7 +14,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("agenda")
+@RequestMapping("/agenda")
 public class AgendaController {
 
     @Autowired
@@ -35,6 +35,22 @@ public class AgendaController {
         List<AgendaDTO> agendas = agendaService.addAgenda(agendaDTO);
 
         return ResponseEntity.ok(agendas);
+    }
+
+    @PutMapping(value = "upd")
+    public ResponseEntity<AgendaDTO> updateAgenda(
+            @RequestParam Integer id,
+            @RequestBody AgendaDTO agendaDTO) {
+        try {
+            // Delegar la lógica al servicio
+            AgendaDTO updatedAgenda = agendaService.UpdAgenda(id, agendaDTO);
+
+            // Retornar la respuesta con el DTO actualizado
+            return ResponseEntity.ok(updatedAgenda);
+        } catch (RuntimeException e) {
+            // Manejo de errores en caso de no encontrar la agenda
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
 }

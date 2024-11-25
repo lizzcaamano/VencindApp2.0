@@ -49,9 +49,27 @@ public class AgendaService implements IAgendaService {
         return allAgendas.stream().map(agendaMapper::toDTO).collect(Collectors.toList());
     }
 
+
     @Override
-    public AgendaDTO UpdAgenda(AgendaDTO agendaDTO) {
-        return null;
+    public AgendaDTO UpdAgenda(Integer id, AgendaDTO agendaDTO) {
+        // Buscar la entidad existente por ID
+        Agenda existeAgenda = agendaDAO.findIdAgenda(id);
+        if (existeAgenda == null) {
+            throw new RuntimeException("Agenda no encontrada");
+        }
+
+        // Mapear los datos actualizados desde el DTO a la entidad existente
+        existeAgenda.setFechaInicio(agendaDTO.getFechaInicio());
+        existeAgenda.setEvento(agendaDTO.getEvento());
+        existeAgenda.setEstado(agendaDTO.getEstado());
+        existeAgenda.setUsuario(existeAgenda.getUsuario());
+        existeAgenda.setNotificacion(existeAgenda.getNotificacion());
+
+        // Guardar los cambios en la base de datos
+        Agenda updatedAgenda = agendaDAO.UpdateAgenda(existeAgenda);
+
+        // Mapear la entidad actualizada de vuelta a un DTO
+        return agendaMapper.toDTO(updatedAgenda);
     }
 
     @Override

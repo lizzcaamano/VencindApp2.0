@@ -9,7 +9,7 @@ import java.util.List;
 public interface IAgendaService {
 
     List<AgendaDTO> addAgenda(AgendaDTO agendadto);
-    AgendaDTO UpdAgenda(AgendaDTO agendaDTO);
+    AgendaDTO UpdAgenda(Integer id, AgendaDTO agendaDTO);
     Agenda FindIdAgenda (int id);
     List<Agenda> listAllAgendas();
     List<Agenda> FindByFechaInicio(Instant fechaInicio);
