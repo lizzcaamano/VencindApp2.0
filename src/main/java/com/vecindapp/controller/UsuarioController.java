@@ -5,6 +5,7 @@ import com.vecindapp.entity.Usuario;
 import com.vecindapp.service.IUsuarioService;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,12 +29,12 @@ public class UsuarioController {
         return Uservice.findById(id);
     }
 
-    @GetMapping("byname/{name}")
+    @GetMapping(value="byname/{name}", consumes=MediaType.APPLICATION_JSON_VALUE)
     public List<Usuario> findByName(@PathParam("name") String name){
         return Uservice.findByNombre(name);
     }
 
-    @PostMapping("insert")
+    @PostMapping(value="/insert", consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<Usuario> insert(@RequestBody Usuario usuario){
         Uservice.insertUsuario(usuario);
         return Uservice.ListUsuarios();
