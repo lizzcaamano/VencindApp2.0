@@ -2,6 +2,7 @@ package com.vecindapp.controller;
 
 
 import com.vecindapp.entity.Usuario;
+import com.vecindapp.repository.dto.UsuarioDTO;
 import com.vecindapp.service.IUsuarioService;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,12 @@ public class UsuarioController {
     private IUsuarioService Uservice;
 
     @GetMapping("list")
-    public List<Usuario> lista(){
+    public List<UsuarioDTO> lista(){
         return Uservice.ListUsuarios();
     }
 
     @GetMapping("byid")
-    public Usuario findById(@RequestParam("id") int id){
+    public UsuarioDTO findById(@RequestParam("id") int id){
         return Uservice.findById(id);
     }
 
@@ -35,7 +36,7 @@ public class UsuarioController {
     }
 
     @PostMapping(value="/insert", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public List<Usuario> insert(@RequestBody Usuario usuario){
+    public List<UsuarioDTO> insert(@RequestBody UsuarioDTO usuario){
         Uservice.insertUsuario(usuario);
         return Uservice.ListUsuarios();
     }

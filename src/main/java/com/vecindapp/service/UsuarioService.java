@@ -3,6 +3,7 @@ package com.vecindapp.service;
 import com.vecindapp.entity.Calificacion;
 import com.vecindapp.entity.Usuario;
 import com.vecindapp.repository.dao.IUsuarioDAO;
+import com.vecindapp.repository.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,38 +15,29 @@ public class UsuarioService implements IUsuarioService {
     @Autowired
     IUsuarioDAO usudao;
 
+
     @Override
-    public Usuario findById(int id) {
-        return usudao.findById(id);
+    public UsuarioDTO findById(int id) {
+        return null;
     }
 
     @Override
-    public List<Usuario> ListUsuarios() {
-        return usudao.ListUsuarios();
+    public List<UsuarioDTO> ListUsuarios() {
+        return List.of();
     }
 
     @Override
-    public Usuario insertUsuario(Usuario usuario) {
-        return usudao.insertUsuario(usuario);
+    public List<UsuarioDTO> insertUsuario(UsuarioDTO usuariodto) {
+        return List.of();
     }
 
     @Override
-    public Usuario updateUsuario(Usuario usuario) {
-        return usudao.updateUsuario(usuario);
+    public UsuarioDTO updateUsuario(UsuarioDTO usuariodto) {
+        return null;
     }
 
     @Override
     public List<Usuario> findByNombre(String nombre) {
-        return usudao.findByNombre(nombre);
+        return List.of();
     }
-
-   /* @Override
-    public List<Usuario> findByCalificacion(Calificacion calificaciones) {
-        return usudao.findByCalificacion(calificaciones);
-    }*/
-
-    /*@Override
-    public Usuario updateByEstado(String estado) {
-        return usudao.updateByEstado(estado);
-    }*/
 }
