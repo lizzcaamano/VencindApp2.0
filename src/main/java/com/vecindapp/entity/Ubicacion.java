@@ -1,8 +1,12 @@
 package com.vecindapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "ubicacion")
@@ -20,6 +24,7 @@ public class Ubicacion {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "localidad_id")
     private Localidad localidad;
+
 
     @Column(name = "barrio", length = 80)
     private String barrio;

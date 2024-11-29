@@ -19,8 +19,6 @@ public class Notificacion {
     @Column(name = "notificacion_id", nullable = false)
     private Integer id;
 
-    @Column(name = "user_id")
-    private Integer userId;
 
     @Column(name = "tipo", length = 50)
     private String tipo;
@@ -47,14 +45,6 @@ public class Notificacion {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public String getTipo() {

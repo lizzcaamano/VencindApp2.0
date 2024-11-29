@@ -1,6 +1,7 @@
 package com.vecindapp.repository.dto;
 
 import java.time.Instant;
+import java.util.Set;
 
 public class UsuarioDTO {
 
@@ -11,18 +12,14 @@ public class UsuarioDTO {
     private String password;
     private String telefono;
     private String direccion;
+    private String descripcion;
+    private String foto;
     private Instant fechaRegistro;
     private String estado;
 
     //Atributos referentes a relaciones que tiene Usuario
-    private Integer agendaId;
-    private Integer calificacionId;
-    private Integer chatId;
-    private Integer documentoId;
-    private Integer favoritoId;
-    private Integer reporteId;
-    private Integer reservaId;
-    private Integer rolId;
+    private Integer ubicacionId;
+    private String barriod;
 
     public Integer getId() {
         return id;
@@ -72,6 +69,22 @@ public class UsuarioDTO {
         this.direccion = direccion;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
     public Instant getFechaRegistro() {
         return fechaRegistro;
     }
@@ -88,67 +101,20 @@ public class UsuarioDTO {
         this.estado = estado;
     }
 
-    public Integer getAgendaId() {
-        return agendaId;
+    public Integer getUbicacionId() {
+        return ubicacionId;
     }
 
-    public void setAgendaId(Integer agendaId) {
-        this.agendaId = agendaId;
+    public void setUbicacionId(Integer ubicacionId) {
+        this.ubicacionId = ubicacionId;
     }
 
-    public Integer getCalificacionId() {
-        return calificacionId;
+    public String getBarriod() {
+        return barriod;
     }
 
-    public void setCalificacionId(Integer calificacionId) {
-        this.calificacionId = calificacionId;
+    public void setBarriod(String ciudad) {
+        this.barriod = ciudad;
     }
 
-    public Integer getChatId() {
-        return chatId;
-    }
-
-    public void setChatId(Integer chatId) {
-        this.chatId = chatId;
-    }
-
-    public Integer getDocumentoId() {
-        return documentoId;
-    }
-
-    public void setDocumentoId(Integer documentoId) {
-        this.documentoId = documentoId;
-    }
-
-    public Integer getFavoritoId() {
-        return favoritoId;
-    }
-
-    public void setFavoritoId(Integer favoritoId) {
-        this.favoritoId = favoritoId;
-    }
-
-    public Integer getReporteId() {
-        return reporteId;
-    }
-
-    public void setReporteId(Integer reporteId) {
-        this.reporteId = reporteId;
-    }
-
-    public Integer getReservaId() {
-        return reservaId;
-    }
-
-    public void setReservaId(Integer reservaId) {
-        this.reservaId = reservaId;
-    }
-
-    public Integer getRolId() {
-        return rolId;
-    }
-
-    public void setRolId(Integer rolId) {
-        this.rolId = rolId;
-    }
 }

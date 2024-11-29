@@ -20,9 +20,6 @@ public class Respuesta {
     @JoinColumn(name = "reporte_id")
     private Reporte reporte;
 
-    @Column(name = "user_id")
-    private Integer userId;
-
     @Lob
     @Column(name = "contenido")
     private String contenido;
@@ -47,13 +44,6 @@ public class Respuesta {
         this.reporte = reporte;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 
     public String getContenido() {
         return contenido;

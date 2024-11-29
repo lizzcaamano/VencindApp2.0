@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
 import java.util.*;
@@ -32,6 +34,12 @@ public class Usuario {
     @Column(name = "direccion")
     private String direccion;
 
+    @Column(name = "Descripcion")
+    private String descripcion;
+
+    @Column(name = "foto_perfil")
+    private String foto;
+
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "fecha_registro")
     private Instant fechaRegistro;
@@ -41,6 +49,10 @@ public class Usuario {
     @Column(name = "estado")
     private String estado;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "ubicacion_id")
+    private Ubicacion ubicacion;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "usuario")
@@ -62,10 +74,6 @@ public class Usuario {
     @JsonBackReference
     @OneToMany(mappedBy = "cliente")
     private List<Favorito> favoritos = new ArrayList<>();
-
-    @JsonBackReference
-    @OneToMany(mappedBy = "usuario")
-    private List<Reporte> reportes = new ArrayList<>();
 
     @JsonBackReference
     @OneToMany(mappedBy = "usuario")
@@ -123,6 +131,22 @@ public class Usuario {
         this.direccion = direccion;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
     public Instant getFechaRegistro() {
         return fechaRegistro;
     }
@@ -143,9 +167,14 @@ public class Usuario {
 
     public void setAgenda(List<Agenda> agenda) {this.agenda = agenda;}
 
-    public List<Calificacion> getCalificacion() {return calificaciones;}
 
-    public void setCalificacion(List<Calificacion> calificaciones) {this.calificaciones = calificaciones;}
+    public List<Calificacion> getCalificaciones() {
+        return calificaciones;
+    }
+
+    public void setCalificaciones(List<Calificacion> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
 
     public List<Chat> getChats() {return chats;}
 
@@ -159,10 +188,6 @@ public class Usuario {
 
     public void setFavoritos(List<Favorito> favoritos) {this.favoritos = favoritos;}
 
-    public List<Reporte> getReportes() {return reportes;}
-
-    public void setReportes(List<Reporte> reportes) {this.reportes = reportes;}
-
     public List<Reserva> getReservas() {return reservas;}
 
     public void setReservas(List<Reserva> reservas) {this.reservas = reservas;}
@@ -170,4 +195,14 @@ public class Usuario {
     public List<UsuarioRol> getUsuarioRols() {return usuarioRols;}
 
     public void setUsuarioRols(List<UsuarioRol> usuarioRols) {this.usuarioRols = usuarioRols;}
+
+    public Ubicacion getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(Ubicacion ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+
 }

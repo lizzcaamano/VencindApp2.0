@@ -18,11 +18,6 @@ public class Reporte {
     @Column(name = "reporte_id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonManagedReference
-    @JoinColumn(name = "user_id")
-    private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -51,14 +46,6 @@ public class Reporte {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
     public Reserva getReserva() {

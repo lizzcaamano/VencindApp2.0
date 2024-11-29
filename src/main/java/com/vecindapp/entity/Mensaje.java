@@ -20,9 +20,6 @@ public class Mensaje {
     @JoinColumn(name = "chat_id")
     private Chat chat;
 
-    @Column(name = "user_id")
-    private Integer userId;
-
     @Lob
     @Column(name = "contenido")
     private String contenido;
@@ -47,13 +44,6 @@ public class Mensaje {
         this.chat = chat;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 
     public String getContenido() {
         return contenido;

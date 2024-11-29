@@ -1,9 +1,22 @@
 package com.vecindapp.repository.dto;
 
 import com.vecindapp.entity.Usuario;
+import com.vecindapp.entity.Agenda;
+import com.vecindapp.entity.Calificacion;
+import com.vecindapp.entity.Chat;
+import com.vecindapp.entity.Documento;
+import com.vecindapp.entity.Favorito;
+import com.vecindapp.entity.Reserva;
+import com.vecindapp.entity.UsuarioRol;
+
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Mapper (componentModel = "spring")
 public interface IUsuarioMapper {
@@ -13,24 +26,14 @@ public interface IUsuarioMapper {
 
     //Mapeos (se hacen el las relaciones, sobre los datos que queremos mostrar)
     //Mapeo para pasar de DTO a Entity
-    @Mapping(target = "agendaId", source = "agenda.id")
-    @Mapping(target = "calificacionId", source = "calificacion.id")
-    @Mapping(target = "chatId", source = "chat.id")
-    @Mapping(target = "documentoId", source = "documento.id")
-    @Mapping(target = "favoritoId", source = "favorito.id")
-    @Mapping(target = "reporteId", source = "reporte.id")
-    @Mapping(target = "reservaId", source = "reserva.id")
-    @Mapping(target = "rolId", source = "usuariorol.id")
+    // Mapeo de DTO a Entity
+    @Mapping(target = "ubicacionId", source = "ubicacion.id")
+    @Mapping(target = "barriod", source = "ubicacion.barrio")
     UsuarioDTO toDTO(Usuario usuario);
 
     //Mapeo para pasar de Entity a DTO
-    @Mapping(target = "agenda.id", source = "agendaId")
-    @Mapping(target = "calificacion.id", source = "calificacionId")
-    @Mapping(target = "chat.id", source = "chatId")
-    @Mapping(target = "documento.id", source = "documentoId")
-    @Mapping(target = "favorito.id", source = "favoritoId")
-    @Mapping(target = "reporte.id", source = "reporteId")
-    @Mapping(target = "reserva.id", source = "reservaId")
-    @Mapping(target = "usuariorol.id", source = "rolId")
-    UsuarioDTO toEntity(UsuarioDTO usuarioDTO);
+    @Mapping(target = "ubicacion.id", source = "ubicacionId")
+    @Mapping(target = "ubicacion.barrio", source = "barriod")
+    Usuario toEntity(UsuarioDTO usuarioDTO);
+
 }
