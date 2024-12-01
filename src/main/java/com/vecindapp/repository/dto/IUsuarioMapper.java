@@ -1,22 +1,12 @@
 package com.vecindapp.repository.dto;
 
 import com.vecindapp.entity.Usuario;
-import com.vecindapp.entity.Agenda;
-import com.vecindapp.entity.Calificacion;
-import com.vecindapp.entity.Chat;
-import com.vecindapp.entity.Documento;
-import com.vecindapp.entity.Favorito;
-import com.vecindapp.entity.Reserva;
-import com.vecindapp.entity.UsuarioRol;
-
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+
 
 @Mapper (componentModel = "spring")
 public interface IUsuarioMapper {

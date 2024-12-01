@@ -1,7 +1,6 @@
 package com.vecindapp.repository.dto;
 
 import java.time.Instant;
-import java.util.Set;
 
 public class UsuarioDTO {
 
@@ -20,6 +19,12 @@ public class UsuarioDTO {
     //Atributos referentes a relaciones que tiene Usuario
     private Integer ubicacionId;
     private String barriod;
+    private Integer localidadId;
+    private String localidad;
+    private Integer roId;
+    private Integer ciudadId;
+    private String ciudad;
+
 
     public Integer getId() {
         return id;

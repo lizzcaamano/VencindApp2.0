@@ -1,13 +1,12 @@
-package com.vecindapp.vecindappv2;
+package com.vecindapp.entity;
 
-import com.vecindapp.entity.Servicio;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "imagenes")
-public class Imagene {
+public class Imagen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "imagen_id", nullable = false)

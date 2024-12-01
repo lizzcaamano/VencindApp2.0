@@ -49,7 +49,7 @@ public class Usuario {
     @Column(name = "estado")
     private String estado;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "ubicacion_id")
     private Ubicacion ubicacion;

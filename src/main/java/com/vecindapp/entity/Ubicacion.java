@@ -32,6 +32,20 @@ public class Ubicacion {
     @Column(name = "direccion", length = 80)
     private String direccion;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "barrio_id")
+    private Barrio barrio1;
+
+    public Barrio getBarrio1() {
+        return barrio1;
+    }
+
+    public void setBarrio1(Barrio barrio1) {
+        this.barrio1 = barrio1;
+    }
+
+
     public Integer getId() {
         return id;
     }

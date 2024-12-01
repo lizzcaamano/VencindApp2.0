@@ -21,7 +21,7 @@ public class Reserva {
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "cliente_id")
     private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
