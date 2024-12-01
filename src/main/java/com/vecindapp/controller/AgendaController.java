@@ -25,10 +25,6 @@ public class AgendaController {
         return agendaService.listAllAgendas();
     }
 
-    /*@PostMapping(value="insert", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void insertAgenda(@RequestBody Agenda agenda){
-        agendaService.addAgenda(agenda);
-    }*/
 
     @PostMapping(value="insert",  produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<AgendaDTO>> addAgenda(@RequestBody AgendaDTO agendaDTO){
