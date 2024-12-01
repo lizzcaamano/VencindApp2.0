@@ -15,22 +15,23 @@ public class Ubicacion {
     @Column(name = "ubicacion_id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "ciudad_id")
-    private Ciudad ciudad;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "localidad_id")
-    private Localidad localidad;
-
-
-    @Column(name = "barrio", length = 80)
-    private String barrio;
 
     @Column(name = "direccion", length = 80)
     private String direccion;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "barrio_id")
+    private Barrio barrio;
+
+    public Barrio getBarrio() {
+        return barrio;
+    }
+
+    public void setBarrio(Barrio barrio) {
+        this.barrio = barrio;
+    }
+
 
     public Integer getId() {
         return id;
@@ -40,29 +41,6 @@ public class Ubicacion {
         this.id = id;
     }
 
-    public Ciudad getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(Ciudad ciudad) {
-        this.ciudad = ciudad;
-    }
-
-    public Localidad getLocalidad() {
-        return localidad;
-    }
-
-    public void setLocalidad(Localidad localidad) {
-        this.localidad = localidad;
-    }
-
-    public String getBarrio() {
-        return barrio;
-    }
-
-    public void setBarrio(String barrio) {
-        this.barrio = barrio;
-    }
 
     public String getDireccion() {
         return direccion;

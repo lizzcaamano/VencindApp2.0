@@ -37,7 +37,7 @@ class AgendaServiceTest {
     /*@Test*/
     /*void testAddAgenda() {
         // Preparar
-        AgendaDTO newItem = new AgendaDTO(
+        /*AgendaDTO newItem = new AgendaDTO(
                 "pendiente",
                 "pintar pared",
                 ZonedDateTime.parse("2024-12-01T09:00:00Z").toInstant(),

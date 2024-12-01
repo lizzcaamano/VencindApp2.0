@@ -1,8 +1,8 @@
 package com.vecindapp.repository.dto;
 
 import java.time.Instant;
-import java.util.Set;
 
+//Funciona para Administrador y para cliente
 public class UsuarioDTO {
 
     //Atributos propios de la entidad Usuario
@@ -11,7 +11,6 @@ public class UsuarioDTO {
     private String email;
     private String password;
     private String telefono;
-    private String direccion;
     private String descripcion;
     private String foto;
     private Instant fechaRegistro;
@@ -19,7 +18,7 @@ public class UsuarioDTO {
 
     //Atributos referentes a relaciones que tiene Usuario
     private Integer ubicacionId;
-    private String barriod;
+
 
     public Integer getId() {
         return id;
@@ -61,13 +60,6 @@ public class UsuarioDTO {
         this.telefono = telefono;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
 
     public String getDescripcion() {
         return descripcion;
@@ -109,12 +101,6 @@ public class UsuarioDTO {
         this.ubicacionId = ubicacionId;
     }
 
-    public String getBarriod() {
-        return barriod;
-    }
 
-    public void setBarriod(String ciudad) {
-        this.barriod = ciudad;
-    }
 
 }

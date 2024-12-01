@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UsuarioDAO implements IUsuarioDAO{
@@ -39,4 +40,11 @@ public class UsuarioDAO implements IUsuarioDAO{
     public List<Usuario> findByNombre(String nombre) {
         return usujpa.findByNombre(nombre);
     }
+
+    @Override
+    public Optional<Usuario> findByEmail(String email) {
+        return usujpa.findByEmail(email);
+    }
+
+
 }

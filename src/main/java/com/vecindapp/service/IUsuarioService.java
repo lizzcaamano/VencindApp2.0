@@ -11,7 +11,7 @@ public interface IUsuarioService {
     public UsuarioDTO findById(int id);
     public List<UsuarioDTO> ListUsuarios();
     public List<UsuarioDTO> insertUsuario(UsuarioDTO usuariodto);
-    public UsuarioDTO updateUsuario(UsuarioDTO usuariodto);
+    public UsuarioDTO updateUsuario(Integer id, UsuarioDTO usuariodto);
 
     //CONSULTAS ADICIONALES
     public List<Usuario> findByNombre(String nombre);
