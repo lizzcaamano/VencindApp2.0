@@ -18,12 +18,10 @@ public interface IUsuarioMapper {
     //Mapeo para pasar de DTO a Entity
     // Mapeo de DTO a Entity
     @Mapping(target = "ubicacionId", source = "ubicacion.id")
-    @Mapping(target = "barriod", source = "ubicacion.barrio")
     UsuarioDTO toDTO(Usuario usuario);
 
     //Mapeo para pasar de Entity a DTO
     @Mapping(target = "ubicacion.id", source = "ubicacionId")
-    @Mapping(target = "ubicacion.barrio", source = "barriod")
     Usuario toEntity(UsuarioDTO usuarioDTO);
 
 }

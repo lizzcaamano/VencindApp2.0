@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ILocalidadJPA extends JpaRepository<Localidad, Integer> {
 
+    //Métodos personalizados
+    public Localidad findByNombreLocalidad(String nombre);
 }

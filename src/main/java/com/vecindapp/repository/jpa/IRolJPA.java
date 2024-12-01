@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface IRolJPA extends JpaRepository<Rol, Integer> {
+    public Rol findByNombre(String nombre);
 }

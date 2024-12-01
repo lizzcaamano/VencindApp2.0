@@ -31,9 +31,6 @@ public class Usuario {
     @Column(name = "telefono", length = 20)
     private String telefono;
 
-    @Column(name = "direccion")
-    private String direccion;
-
     @Column(name = "Descripcion")
     private String descripcion;
 
@@ -123,13 +120,6 @@ public class Usuario {
         this.telefono = telefono;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
 
     public String getDescripcion() {
         return descripcion;

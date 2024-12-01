@@ -36,10 +36,9 @@ public class UsuarioService implements IUsuarioService {
             //Verificamos si la ubicacion es nula
             if (usuario.getUbicacion() != null) {
                 usuarioDTO.setUbicacionId(usuario.getUbicacion().getId());
-                usuarioDTO.setBarriod(usuario.getUbicacion().getBarrio());
+
             }else {
                 usuarioDTO.setUbicacionId(0);
-                usuarioDTO.setBarriod("Escoger");
             }
             return usuarioDTO;
         }else {
@@ -59,10 +58,8 @@ public class UsuarioService implements IUsuarioService {
                         //Verificamos si la ubicacion es nula
                         if (usuario.getUbicacion() != null) {
                             usuarioDTO.setUbicacionId(usuario.getUbicacion().getId());
-                            usuarioDTO.setBarriod(usuario.getUbicacion().getBarrio());
                         }else {
                             usuarioDTO.setUbicacionId(0);
-                            usuarioDTO.setBarriod("Escoger");
                         }
                             return usuarioDTO;
                 })
@@ -91,7 +88,6 @@ public class UsuarioService implements IUsuarioService {
 
             //if ( ubicacion.getId().equals(usuariodto.getUbicacionId())){
                 ubicacion.setId(usuariodto.getUbicacionId());
-                ubicacion.setBarrio(usuariodto.getBarriod());
             /*}else {
 
             }*/
@@ -118,7 +114,6 @@ public class UsuarioService implements IUsuarioService {
             usuarioExiste.setFoto(usuariodto.getFoto());
             usuarioExiste.setPassword(usuariodto.getPassword());
             usuarioExiste.setTelefono(usuariodto.getTelefono());
-            usuarioExiste.setDireccion(usuariodto.getDireccion());
             usuarioExiste.setDescripcion(usuariodto.getDescripcion());
             usuarioExiste.setFechaRegistro(usuariodto.getFechaRegistro());
             usuarioExiste.setEstado(usuariodto.getEstado());

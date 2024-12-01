@@ -5,5 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ICiudadJPA extends JpaRepository<Ciudad, Integer> {
 
-    //public Ciudad findByNombre(String nombre);
+    //Métodos personalizados
+    public Ciudad findByNombreCiudad(String nombre);
+
 }

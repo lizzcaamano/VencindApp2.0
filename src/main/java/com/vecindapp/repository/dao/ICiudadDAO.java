@@ -12,6 +12,6 @@ public interface ICiudadDAO {
     public List<Ciudad> listCiudades();
 
     //Métodos adicionales
-    //public Ciudad findByNombre(String nombre);
+    public Ciudad findByNombreCiudad(String nombre);
 
 }
