@@ -13,7 +13,7 @@ public class Ciudad {
     private Integer id;
 
     @Column(name = "nombre_ciudad", length = 150)
-    private String nombreCiudad;
+        private String nombreCiudad;
 
     public Integer getId() {
         return id;

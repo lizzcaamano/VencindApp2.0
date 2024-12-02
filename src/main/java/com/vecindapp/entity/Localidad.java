@@ -11,7 +11,7 @@ public class Localidad {
     @Column(name = "localidad_id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "ciudad_id")
     private Ciudad ciudad;

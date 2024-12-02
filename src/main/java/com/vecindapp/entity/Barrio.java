@@ -18,7 +18,7 @@ public class Barrio {
     @Column(name = "nombre_barrio", length = 150)
     private String nombreBarrio;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "localidad_id")
     private Localidad localidad;

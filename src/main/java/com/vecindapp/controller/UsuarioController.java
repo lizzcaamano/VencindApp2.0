@@ -30,15 +30,24 @@ public class UsuarioController {
         return Uservice.findById(id);
     }
 
-    @GetMapping(value="byname/{name}", consumes=MediaType.APPLICATION_JSON_VALUE)
-    public List<Usuario> findByName(@PathParam("name") String name){
+
+
+    @GetMapping(value="/byname", consumes=MediaType.APPLICATION_JSON_VALUE)
+    public List<UsuarioDTO> findByName(@RequestParam("name") String name){
         return Uservice.findByNombre(name);
+
     }
 
     @PostMapping(value="/insert", consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<UsuarioDTO> insert(@RequestBody UsuarioDTO usuario){
         Uservice.insertUsuario(usuario);
         return Uservice.ListUsuarios();
+    }
+
+    @PutMapping(value="/upd", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public UsuarioDTO update(@RequestBody UsuarioDTO usuario, @PathParam("id") Integer id){
+
+        return Uservice.updateUsuario(id, usuario);
     }
 
 }

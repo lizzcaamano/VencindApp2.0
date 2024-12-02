@@ -12,6 +12,7 @@ import java.util.List;
 @Table(name = "ubicacion")
 public class Ubicacion {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ubicacion_id", nullable = false)
     private Integer id;
 
@@ -19,7 +20,7 @@ public class Ubicacion {
     @Column(name = "direccion", length = 80)
     private String direccion;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "barrio_id")
     private Barrio barrio;

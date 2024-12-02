@@ -16,8 +16,9 @@ public class UsuarioDTO {
     private Instant fechaRegistro;
     private String estado;
 
+
     //Atributos referentes a relaciones que tiene Usuario
-    private Integer ubicacionId;
+    private UbicacionDTO ubicacion;
 
 
     public Integer getId() {
@@ -93,14 +94,13 @@ public class UsuarioDTO {
         this.estado = estado;
     }
 
-    public Integer getUbicacionId() {
-        return ubicacionId;
+    public UbicacionDTO getUbicacion() {
+        return ubicacion;
     }
 
-    public void setUbicacionId(Integer ubicacionId) {
-        this.ubicacionId = ubicacionId;
+    public void setUbicacion(UbicacionDTO ubicacion) {
+        this.ubicacion = ubicacion;
     }
-
 
 
 }
