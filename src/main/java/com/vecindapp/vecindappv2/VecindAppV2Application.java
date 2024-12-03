@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EntityScan(basePackages = {"com.vecindapp.entity"})
 @EnableJpaRepositories(basePackages = {"com.vecindapp.repository.jpa"})
-@ComponentScan(basePackages = {"com.vecindapp.repository.dao, com.vecindapp.repository.dto,com.vecindapp.service, com.vecindapp"})
+@ComponentScan(basePackages = {"com.vecindapp.repository.dao, com.vecindapp.repository.dto,com.vecindapp.service, com.vecindapp "})
 public class VecindAppV2Application {
 
     public static void main(String[] args) {

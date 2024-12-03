@@ -61,7 +61,6 @@ public class UsuarioDTO {
         this.telefono = telefono;
     }
 
-
     public String getDescripcion() {
         return descripcion;
     }
