@@ -7,15 +7,13 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", uses = {IBarrioMapper.class, ILocalidadMapper.class, ICiudadMapper.class})
+@Mapper(componentModel = "spring", uses = {IBarrioMapper.class})
 //@Mapper(componentModel = "spring")
 public interface IUbicacionMapper {
 
     IUbicacionMapper INSTANCE = Mappers.getMapper(IUbicacionMapper.class);
 
     @Mapping(target = "barrio", source = "barrio")
-    //@Mapping(target = "localidad", source = "barrio.localidad")
-    //@Mapping(target = "ciudad", source = "barrio.localidad.ciudad")
 
     UbicacionDTO toDTO(Ubicacion ubicacion);
 

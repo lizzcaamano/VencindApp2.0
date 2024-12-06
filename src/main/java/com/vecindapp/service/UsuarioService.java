@@ -54,10 +54,10 @@ public class UsuarioService implements IUsuarioService {
                     UbicacionDTO ubicacionDTO = ubiMap.toDTO(ubicacion);
                     ubicacionDTO.setId(ubicacion.getId());
 
-                    BarrioDTO barrioDTO = ubicacionDTO.getBarrio();
-                    LocalidadDTO localidadDTO = barrioDTO.getLocalidad();
+                    /*BarrioDTO barrioDTO = ubicacionDTO.getBarrio();
+                    barrioDTO.getNombreLocalidad();
                     localidadDTO.setNombre(localidad.getNombreLocalidad());
-                    localidadDTO.getCiudad().setNombre(ciudad.getNombreCiudad());
+                    localidadDTO.getCiudad().setNombre(ciudad.getNombreCiudad());*/
                     usuarioDTO.setUbicacion(ubicacionDTO);
                 }else {
                     usuarioDTO.setUbicacion(null);
@@ -66,6 +66,8 @@ public class UsuarioService implements IUsuarioService {
             } else {
                 usuarioDTO.setUbicacion(null);
             }
+
+
 
             return usuarioDTO;
         }else {
@@ -96,10 +98,10 @@ public class UsuarioService implements IUsuarioService {
                             UbicacionDTO ubicacionDTO = ubiMap.toDTO(ubicacion);
                             ubicacionDTO.setId(ubicacion.getId());
 
-                            BarrioDTO barrioDTO = ubicacionDTO.getBarrio();
+                           /* BarrioDTO barrioDTO = ubicacionDTO.getBarrio();
                             LocalidadDTO localidadDTO = barrioDTO.getLocalidad();
                             localidadDTO.setNombre(localidad.getNombreLocalidad());
-                            localidadDTO.getCiudad().setNombre(ciudad.getNombreCiudad());
+                            localidadDTO.getCiudad().setNombre(ciudad.getNombreCiudad());*/
                             usuarioDTO.setUbicacion(ubicacionDTO);
                         }else {
                             usuarioDTO.setUbicacion(null);
@@ -329,10 +331,10 @@ public class UsuarioService implements IUsuarioService {
                     UbicacionDTO ubicacionDTO = ubiMap.toDTO(ubicacion);
                     ubicacionDTO.setId(ubicacion.getId());
 
-                    BarrioDTO barrioDTO = ubicacionDTO.getBarrio();
+                   /* BarrioDTO barrioDTO = ubicacionDTO.getBarrio();
                     LocalidadDTO localidadDTO = barrioDTO.getLocalidad();
                     localidadDTO.setNombre(localidad.getNombreLocalidad());
-                    localidadDTO.getCiudad().setNombre(ciudad.getNombreCiudad());
+                    localidadDTO.getCiudad().setNombre(ciudad.getNombreCiudad());*/
 
                     usuarioDTO.setUbicacion(ubicacionDTO);
                 } else {

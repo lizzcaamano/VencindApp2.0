@@ -11,14 +11,14 @@ public class ClienteDTO{
     private String email;
     private String password;
     private String telefono;
-    private String descripcion;
     private String foto;
     private Instant fechaRegistro;
     private String estado;
 
 
     //Atributos referentes a relaciones que tiene Usuario
-    private Integer ubicacionId;
+    private Integer rolId;
+    private UbicacionDTO ubicacion;
 
 
     public Integer getId() {
@@ -61,14 +61,6 @@ public class ClienteDTO{
         this.telefono = telefono;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     public String getFoto() {
         return foto;
     }
@@ -93,11 +85,19 @@ public class ClienteDTO{
         this.estado = estado;
     }
 
-    public Integer getUbicacionId() {
-        return ubicacionId;
+    public Integer getRolId() {
+        return rolId;
     }
 
-    public void setUbicacionId(Integer ubicacionId) {
-        this.ubicacionId = ubicacionId;
+    public void setRolId(Integer rolId) {
+        this.rolId = 3;
+    }
+
+    public UbicacionDTO getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(UbicacionDTO ubicacion) {
+        this.ubicacion = ubicacion;
     }
 }

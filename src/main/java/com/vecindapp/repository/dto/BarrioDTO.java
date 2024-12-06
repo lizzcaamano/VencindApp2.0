@@ -4,7 +4,8 @@ public class BarrioDTO {
 
     private Integer id;
     private String nombreBarrio;
-    private LocalidadDTO localidad;
+    private String localidad;
+    private String nombreCiudad;
 
     public Integer getId() {
         return id;
@@ -22,11 +23,19 @@ public class BarrioDTO {
         this.nombreBarrio = nombreBarrio;
     }
 
-    public LocalidadDTO getLocalidad() {
+    public String getLocalidad() {
         return localidad;
     }
 
-    public void setLocalidad(LocalidadDTO localidad) {
+    public void setLocalidad(String localidad) {
         this.localidad = localidad;
+    }
+
+    public String getNombreCiudad() {
+        return nombreCiudad;
+    }
+
+    public void setNombreCiudad(String nombreCiudad) {
+        this.nombreCiudad = nombreCiudad;
     }
 }
