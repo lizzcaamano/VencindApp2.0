@@ -38,4 +38,9 @@ public class UsuarioRolDAO implements IUsuarioRolDAO {
     public List<UsuarioRol> findByRole(Integer rolid) {
         return jpa.findByRoleId(rolid);
     }
+
+    @Override
+    public List<String> findUsuarioRolByUsuarioId(Integer usuarioId) {
+        return jpa.findUsuarioRolByUsuarioId(usuarioId);
+    }
 }

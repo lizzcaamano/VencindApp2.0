@@ -16,11 +16,17 @@ public class Chat {
     @Column(name = "chat_id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference
     @JoinColumn(name = "user_id")
     private Usuario usuario;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonManagedReference
+    @JoinColumn(name = "trabajador_id")
+    private Usuario trabajador;
 
     @Column(name = "servicio_id")
     private Integer servicioId;
@@ -28,6 +34,9 @@ public class Chat {
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "fecha_inicio")
     private Instant fechaInicio;
+
+    @Column(name = "room")
+    private String roomId;
 
     public Integer getId() {
         return id;
@@ -43,6 +52,14 @@ public class Chat {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Usuario getTrabajador() {
+        return trabajador;
+    }
+
+    public void setTrabajador(Usuario trabajador) {
+        this.trabajador = trabajador;
     }
 
     public Integer getServicioId() {
@@ -61,4 +78,11 @@ public class Chat {
         this.fechaInicio = fechaInicio;
     }
 
+    public String getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
+    }
 }
