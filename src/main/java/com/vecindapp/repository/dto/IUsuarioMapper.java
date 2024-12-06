@@ -11,19 +11,19 @@ import org.mapstruct.factory.Mappers;
 @Mapper (componentModel = "spring")
 public interface IUsuarioMapper {
 
-   /* //Instancia para mapper
+   //Instancia para mapper
     IUsuarioMapper mapper = Mappers.getMapper(IUsuarioMapper.class);
 
     //Mapeos (se hacen el las relaciones, sobre los datos que queremos mostrar)
     //Mapeo para pasar de DTO a Entity
     // Mapeo de DTO a Entity
 
-    @Mapping(target = "ubicacion", source = "ubicacion.id")
+    //@Mapping(target = "ubicacion", source = "ubicacion.id")
     UsuarioDTO toDTO(Usuario usuario);
 
     //Mapeo para pasar de Entity a DTO
-    @Mapping(target = "ubicacion.id", source = "ubicacion")
+    //@Mapping(target = "ubicacion.id", source = "ubicacion")
 
-    Usuario toEntity(UsuarioDTO usuarioDTO);*/
+    Usuario toEntity(UsuarioDTO usuarioDTO);
 
 }

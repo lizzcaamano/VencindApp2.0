@@ -46,5 +46,10 @@ public class UsuarioDAO implements IUsuarioDAO{
         return usujpa.findByEmail(email);
     }
 
+    @Override
+    public String updateByEstado( int id, String estado) {
+        return usujpa.updateEstado(id, estado);
+    }
+
 
 }

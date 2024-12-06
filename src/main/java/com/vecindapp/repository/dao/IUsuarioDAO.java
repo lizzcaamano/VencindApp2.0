@@ -21,6 +21,6 @@ public interface IUsuarioDAO {
     public List<Usuario> findByNombre(String nombre);
     public Optional<Usuario> findByEmail(String email);
     //public List<Usuario> findByCalificacion(Calificacion calificaciones);
-    //public Usuario updateByEstado(String estado);
+    public String updateByEstado(int id,String estado);
 
 }

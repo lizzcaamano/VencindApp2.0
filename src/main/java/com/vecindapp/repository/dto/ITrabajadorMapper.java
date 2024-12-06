@@ -23,7 +23,7 @@ public interface ITrabajadorMapper {
     TrabajadorDTO toDto(Usuario trabajador);
 
     // DTO a Entity
-    @Mapping(target = "usuarioRols", expression = "java(mapRolIdToUsuarioRols(clienteDTO.getRolId()))")
+    @Mapping(target = "usuarioRols", expression = "java(mapRolIdToUsuarioRols(trabajadorDTO.getRolId()))")
     @Mapping(target = "ubicacion.direccion", source = "ubicaciondir")
     @Mapping(target = "ubicacion.barrio.nombreBarrio", source = "nombreBarrio")
     @Mapping(target = "ubicacion.barrio.localidad.nombreLocalidad", source = "nombreLocalidad")

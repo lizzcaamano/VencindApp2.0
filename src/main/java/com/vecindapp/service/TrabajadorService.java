@@ -80,12 +80,12 @@ public class TrabajadorService implements ITrabajadorService {
 
 
         // Crear el objeto Rol con el id 3 (el id del rol cliente)
-        Rol rolCliente = new Rol();
-        rolCliente.setId(2);  // Asignar el id del rol cliente
+        Rol rolTrabajador = new Rol();
+        rolTrabajador.setId(2);  // Asignar el id del rol cliente
 
         // Asociar el rol al UsuarioRol
         UsuarioRol usuarioRol = new UsuarioRol();
-        usuarioRol.setRole(rolCliente);
+        usuarioRol.setRole(rolTrabajador);
         // Asociar el UsuarioRol al usuario
         usuarioRol.setUser(trabajador);
 

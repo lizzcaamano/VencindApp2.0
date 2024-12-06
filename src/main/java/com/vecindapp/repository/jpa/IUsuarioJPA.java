@@ -3,6 +3,10 @@ package com.vecindapp.repository.jpa;
 import com.vecindapp.entity.Calificacion;
 import com.vecindapp.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +23,11 @@ public interface IUsuarioJPA extends JpaRepository<Usuario, Integer> {
     //public List<Usuario> findByCalificacion(Calificacion calificaciones);
 
     // Modificar Estado
-    //public Usuario updateByEstado(String estado);
+    @Modifying
+    @Transactional
+    @Query("UPDATE Usuario u SET u.estado = :estado WHERE u.id = :id")
+    public String updateEstado(@Param("id") Integer id, @Param("estado") String estado);
+
 
 
 

@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("cliente")
+@RequestMapping("trabajador")
 @CrossOrigin("*")
 public class TrabajadorController {
 
