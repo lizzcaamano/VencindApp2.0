@@ -1,5 +1,8 @@
 package com.vecindapp.repository.dto;
 
+import com.vecindapp.entity.Barrio;
+import com.vecindapp.entity.Ubicacion;
+
 import java.time.Instant;
 
 //Heredamos de UsuarioDTO sus atributos y métodos
@@ -17,8 +20,11 @@ public class ClienteDTO{
 
 
     //Atributos referentes a relaciones que tiene Usuario
-    private Integer rolId;
-    private UbicacionDTO ubicacion;
+    private String rolName;
+    private String ubicacionName;
+    private String barrioName;
+    private String localidadName;
+    private String ciudadName;
 
 
     public Integer getId() {
@@ -85,19 +91,43 @@ public class ClienteDTO{
         this.estado = estado;
     }
 
-    public Integer getRolId() {
-        return rolId;
+    public String getRolName() {
+        return rolName;
     }
 
-    public void setRolId(Integer rolId) {
-        this.rolId = 3;
+    public void setRolName(String rolName) {
+        this.rolName = rolName;
     }
 
-    public UbicacionDTO getUbicacion() {
-        return ubicacion;
+    public String getUbicacionName() {
+        return ubicacionName;
     }
 
-    public void setUbicacion(UbicacionDTO ubicacion) {
-        this.ubicacion = ubicacion;
+    public void setUbicacionName(String ubicacionName) {
+        this.ubicacionName = ubicacionName;
+    }
+
+    public String getBarrioName() {
+        return barrioName;
+    }
+
+    public void setBarrioName(String barrioName) {
+        this.barrioName = barrioName;
+    }
+
+    public String getLocalidadName() {
+        return localidadName;
+    }
+
+    public void setLocalidadName(String localidadName) {
+        this.localidadName = localidadName;
+    }
+
+    public String getCiudadName() {
+        return ciudadName;
+    }
+
+    public void setCiudadName(String ciudadName) {
+        this.ciudadName = ciudadName;
     }
 }

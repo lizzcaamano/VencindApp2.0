@@ -17,7 +17,7 @@ import java.util.List;
 @CrossOrigin("*")
 public class UsuarioController {
 
-    @Autowired
+    /*@Autowired
     private IUsuarioService Uservice;
 
     @GetMapping("list")
@@ -48,6 +48,6 @@ public class UsuarioController {
     public UsuarioDTO update(@RequestBody UsuarioDTO usuario, @PathParam("id") Integer id){
 
         return Uservice.updateUsuario(id, usuario);
-    }
+    }*/
 
 }

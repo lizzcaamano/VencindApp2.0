@@ -10,4 +10,5 @@ public interface IUsuarioRolDAO {
     public List<UsuarioRol> insertUsuarioRol(UsuarioRol usuarioRol);
     public List<UsuarioRol> findByUsuario(Integer usuarioid);
     public List<UsuarioRol> findByRole(Integer rolid);
+    public List<String> findUsuarioRolByUsuarioId(Integer usuarioId);
 }
