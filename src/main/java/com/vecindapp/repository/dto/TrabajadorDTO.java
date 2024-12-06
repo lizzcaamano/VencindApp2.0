@@ -3,7 +3,7 @@ package com.vecindapp.repository.dto;
 import java.time.Instant;
 
 //Heredamos de UsuarioDTO sus atributos y métodos
-public class ClienteDTO{
+public class TrabajadorDTO {
 
     //Atributos propios de la entidad Usuario
     private Integer id;
@@ -102,7 +102,7 @@ public class ClienteDTO{
     }
 
     public void setRolId(Integer rolId) {
-        this.rolId = 3;
+        this.rolId = 2;
     }
 
     public String getUbicaciondir() {

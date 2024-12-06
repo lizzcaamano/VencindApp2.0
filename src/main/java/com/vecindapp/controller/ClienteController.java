@@ -22,10 +22,26 @@ public class ClienteController {
         return cliService.ListClientes();
     }
 
+    @GetMapping("single")
+    public ClienteDTO Cliente(@RequestParam("id") int id) {
+        return cliService.findById(id);
+    }
+
+    @GetMapping("byname")
+    public List<ClienteDTO> Cliente(@RequestParam("name") String name) {
+        return cliService.findByNombre(name);
+    }
+
     @PostMapping("add")
     public List<ClienteDTO> Add(@RequestBody ClienteDTO clienteDTO) {
         cliService.insertCliente(clienteDTO);
         return Clientes();
+    }
+
+    @PutMapping("upd")
+    public ClienteDTO Upd(@RequestParam("id") int id, @RequestBody ClienteDTO clienteDTO) {
+
+        return cliService.updateCliente(id, clienteDTO);
     }
 
 

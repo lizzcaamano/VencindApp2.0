@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface IClienteMapper {
-    IClienteMapper mapper = Mappers.getMapper(IClienteMapper.class);
+public interface ITrabajadorMapper {
+    ITrabajadorMapper mapper = Mappers.getMapper(ITrabajadorMapper.class);
 
     // Entity a DTO
     @Mapping(target = "rolId", constant = "3")
@@ -20,7 +20,7 @@ public interface IClienteMapper {
     @Mapping(target = "nombreBarrio", source = "ubicacion.barrio.nombreBarrio")
     @Mapping(target = "nombreLocalidad", source = "ubicacion.barrio.localidad.nombreLocalidad")
     @Mapping(target = "nombreCiudad", source = "ubicacion.barrio.localidad.ciudad.nombreCiudad")
-    ClienteDTO toDto(Usuario cliente);
+    TrabajadorDTO toDto(Usuario trabajador);
 
     // DTO a Entity
     @Mapping(target = "usuarioRols", expression = "java(mapRolIdToUsuarioRols(clienteDTO.getRolId()))")
@@ -28,7 +28,7 @@ public interface IClienteMapper {
     @Mapping(target = "ubicacion.barrio.nombreBarrio", source = "nombreBarrio")
     @Mapping(target = "ubicacion.barrio.localidad.nombreLocalidad", source = "nombreLocalidad")
     @Mapping(target = "ubicacion.barrio.localidad.ciudad.nombreCiudad", source = "nombreCiudad")
-    Usuario toEntity(ClienteDTO clienteDTO);
+    Usuario toEntity(TrabajadorDTO trabajadorDTO);
 
     default List<UsuarioRol> mapRolIdToUsuarioRols(Integer rolId) {
         if (rolId == null) {

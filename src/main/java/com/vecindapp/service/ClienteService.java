@@ -1,14 +1,12 @@
 package com.vecindapp.service;
 
-import com.vecindapp.entity.Rol;
-import com.vecindapp.entity.Ubicacion;
-import com.vecindapp.entity.Usuario;
-import com.vecindapp.entity.UsuarioRol;
+import com.vecindapp.entity.*;
 import com.vecindapp.repository.dao.IUsuarioDAO;
 import com.vecindapp.repository.dao.IUsuarioRolDAO;
 import com.vecindapp.repository.dto.ClienteDTO;
 import com.vecindapp.repository.dto.IClienteMapper;
 import com.vecindapp.repository.dto.UbicacionDTO;
+import com.vecindapp.repository.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +30,13 @@ public class ClienteService implements IClienteService {
 
 
     @Override
+    public ClienteDTO findById(int id) {
+        Usuario user = userDAO.findById(id);
+
+        return climap.toDto(user);
+    }
+
+    @Override
     public List<ClienteDTO> ListClientes() {
         List<Usuario> usuarios= userDAO.ListUsuarios();
 
@@ -48,15 +53,30 @@ public class ClienteService implements IClienteService {
     @Override
     @Transactional
     public List<ClienteDTO> insertCliente(ClienteDTO clientedto) {
-        Usuario usuario = climap.toEntity(clientedto);
+        Usuario cliente = climap.toEntity(clientedto);
+
+        //Para crear ubicacion
+        Barrio barrio = new Barrio();
+        barrio.setNombreBarrio(clientedto.getNombreBarrio());
+
+        Localidad localidad = new Localidad();
+        localidad.setNombreLocalidad(clientedto.getNombreLocalidad());
+
+        Ciudad ciudad = new Ciudad();
+        ciudad.setNombreCiudad(clientedto.getNombreCiudad());
+
+        //Asigancion de informacion
+        localidad.setCiudad(ciudad);
+        barrio.setLocalidad(localidad);
+
 
         Ubicacion ubicacion = new Ubicacion();
-        UbicacionDTO ubicacionDTO = clientedto.getUbicacion();
-        ubicacion.setDireccion(ubicacionDTO.getDireccion());
+        ubicacion.setDireccion(clientedto.getUbicaciondir());
+        ubicacion.setBarrio(barrio);
         // Manejar el barrio y otros detalles
-        ubiservice.insertUbicacion(ubicacionDTO);
-
-        userDAO.insertUsuario(usuario);
+        ubiservice.insertUbicacion(ubicacion);
+        cliente.setUbicacion(ubicacion);
+        userDAO.insertUsuario(cliente);
 
 
         // Crear el objeto Rol con el id 3 (el id del rol cliente)
@@ -67,22 +87,68 @@ public class ClienteService implements IClienteService {
         UsuarioRol usuarioRol = new UsuarioRol();
         usuarioRol.setRole(rolCliente);
         // Asociar el UsuarioRol al usuario
-        usuarioRol.setUser(usuario);
+        usuarioRol.setUser(cliente);
 
         usrolDAO.insertUsuarioRol(usuarioRol);
 
-        climap.toDto(usuario);
+        climap.toDto(cliente);
 
         return ListClientes();
     }
 
     @Override
-    public ClienteDTO updateCliente(Integer id, ClienteDTO clienteDTO) {
-        return null;
+    public ClienteDTO updateCliente(Integer id, ClienteDTO clientedto) {
+        Usuario cliente = climap.toEntity(clientedto);
+        Usuario cliSingle = userDAO.findById(id);
+
+        // Actualizar los campos del usuario
+        cliSingle.setNombre(clientedto.getNombre());
+        cliSingle.setEmail(clientedto.getEmail());
+        cliSingle.setFoto(clientedto.getFoto());
+        cliSingle.setPassword(clientedto.getPassword());
+        cliSingle.setTelefono(clientedto.getTelefono());
+        cliSingle.setDescripcion(clientedto.getDescripcion());
+        cliSingle.setFechaRegistro(clientedto.getFechaRegistro());
+
+        //Para actualizar ubicacion
+        Barrio barrio = new Barrio();
+        barrio.setNombreBarrio(clientedto.getNombreBarrio());
+
+        Localidad localidad = new Localidad();
+        localidad.setNombreLocalidad(clientedto.getNombreLocalidad());
+
+        Ciudad ciudad = new Ciudad();
+        ciudad.setNombreCiudad(clientedto.getNombreCiudad());
+
+        //Asigancion de informacion
+        localidad.setCiudad(ciudad);
+        barrio.setLocalidad(localidad);
+
+
+        Ubicacion ubicacion = new Ubicacion();
+        ubicacion.setDireccion(clientedto.getUbicaciondir());
+        ubicacion.setBarrio(barrio);
+
+        // Manejar el barrio y otros detalles
+        ubiservice.updateUbicacion(ubicacion);
+        cliSingle.setUbicacion(ubicacion);
+
+        userDAO.updateUsuario(cliSingle);
+
+
+        return climap.toDto(cliSingle);
     }
 
     @Override
-    public List<ClienteDTO> findByNombre(String nombre) {
-        return List.of();
-    }
+            public List<ClienteDTO> findByNombre(String nombre) {
+                List<ClienteDTO> clientes = ListClientes();
+
+
+                // Filtrar los usuarios por nombre y mapearlos a DTO
+                 return clientes.stream()
+                    .filter(cliente -> cliente.getNombre() != null &&
+                            cliente.getNombre().toLowerCase().startsWith(nombre.toLowerCase()))
+                    .collect(Collectors.toList());
+
+            }
 }

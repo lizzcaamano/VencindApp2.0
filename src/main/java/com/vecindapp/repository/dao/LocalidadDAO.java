@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class LocalidadDAO implements ILocalidadDAO {
@@ -24,8 +25,13 @@ public class LocalidadDAO implements ILocalidadDAO {
     }
 
     @Override
-    public List<Localidad> findByNombreLocalidad(String nombre) {
-        jpa.findByNombreLocalidad(nombre);
-        return ListLocalidades();
+    public Localidad insert(Localidad localidad) {
+        jpa.save(localidad);
+        return localidad;
+    }
+
+    @Override
+    public Localidad findByNombreLocalidad(String nombre) {
+        return jpa.findByNombreLocalidad(nombre);
     }
 }
