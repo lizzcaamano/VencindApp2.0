@@ -1,5 +1,6 @@
 package com.vecindapp.controller;
 
+import com.vecindapp.utils.JwtResponse;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.http.HttpStatus;
@@ -30,15 +31,23 @@ public class LoginController {
         super();
         this.authManager = authManager;
     }
-    @PostMapping(value = "login", produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<String> login(@RequestParam("user") String user,
-                                        @RequestParam("pwd") String pwd) {
+    @PostMapping(value = "login", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<JwtResponse> login(@RequestParam("user") String user,
+                                             @RequestParam("pwd") String pwd) {
         try {
+            // Autenticar al usuario
             Authentication authentication = authManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(user, pwd));
-            System.out.println("Controller Usuario autenticado: " + authentication.getName());
-            System.out.println("COntroller Autoridades: " + authentication.getAuthorities());
-            return new ResponseEntity<>(getToken(authentication), HttpStatus.OK);
+                    new UsernamePasswordAuthenticationToken(user, pwd)
+            );
+
+            System.out.println("Usuario autenticado: " + authentication.getName());
+            System.out.println("Autoridades: " + authentication.getAuthorities());
+
+            // Generar el token
+            String token = getToken(authentication);
+
+            // Retornar el token encapsulado en JwtResponse
+            return ResponseEntity.ok(new JwtResponse(token));
         } catch (AuthenticationException ex) {
             ex.printStackTrace();
             System.out.println("Error de autenticación: " + ex.getMessage());
@@ -47,21 +56,16 @@ public class LoginController {
     }
 
     private String getToken(Authentication authentication) {
-        // Asegúrate de que estás obteniendo las autoridades correctas
         List<String> authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
-        // Imprimir las autoridades para depuración
-        System.out.println("*****************COntroller***********************");
         System.out.println("Autoridades: " + authorities);
-        System.out.println("****************************************");
+
         String token = Jwts.builder()
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setSubject(authentication.getName())
-                .claim("authorities", authentication.getAuthorities().stream()
-                        .map(GrantedAuthority::getAuthority)
-                        .collect(Collectors.toList()))
+                .claim("authorities", authorities)
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 .signWith(Keys.hmacShaKeyFor(CLAVE.getBytes()))
                 .compact();

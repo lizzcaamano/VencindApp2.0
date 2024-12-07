@@ -1,9 +1,14 @@
 package com.vecindapp.utils;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 
 @Configuration
 @OpenAPIDefinition(
@@ -13,12 +18,12 @@ import org.springframework.context.annotation.Configuration;
                 termsOfService = "Debe aceptar los terminos y condiciones",
                 contact = @Contact(name ="VecindApp Support", url = "www.vecindapp.com", email = "vecindapp@gmail.com"),
                 version = "1.0"
-        )/*,
+        ),
         security = @SecurityRequirement(
                 name = "Security con JWT"
-        )*/
+        )
 )
-/*
+
 @SecurityScheme(
         name = "Security con JWT",
         description = "La seguridad del API por medio de un token",
@@ -28,6 +33,6 @@ import org.springframework.context.annotation.Configuration;
         scheme = "bearer",
         bearerFormat ="JWT"
 
-)*/
+)
 public class SwaggerConfig {
 }

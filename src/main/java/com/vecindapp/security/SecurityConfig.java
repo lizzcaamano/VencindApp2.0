@@ -9,10 +9,14 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.List;
+import java.util.Map;
 
 @EnableWebSecurity
 @Configuration
@@ -38,9 +42,14 @@ public class SecurityConfig {
 
         http.csrf(cus->cus.disable())
                 .authorizeHttpRequests(aut->
-                        aut.requestMatchers(HttpMethod.POST,"/cliente/add").hasAnyRole("ADMINISTRADOR", "CLIENTE")
-                                .requestMatchers(HttpMethod.GET,"/trabajador/all").hasRole("ADMINISTRADOR")
-                                .requestMatchers(HttpMethod.GET,"/cliente/all").authenticated()
+                        aut
+                                //.requestMatchers(HttpMethod.POST,"/trabajador/add").hasAnyRole("ADMINISTRADOR", "CLIENTE")
+                                //.requestMatchers(HttpMethod.GET,"/trabajador/all").hasRole("ADMINISTRADOR")
+                                //.requestMatchers(HttpMethod.GET,"/**").authenticated()
+                                .requestMatchers(HttpMethod.POST, "/login").permitAll()// Permite el acceso al login sin autenticación
+                                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/**").authenticated() // Protege todas las demás rutas POST
+                                .requestMatchers(HttpMethod.GET, "/**").authenticated()  // Protege todas las rutas GET
                                 .anyRequest().permitAll()
                 )
                 .addFilter(new AuthorizationFilterJWT(auth));
@@ -61,9 +70,13 @@ public class SecurityConfig {
         JdbcUserDetailsManager jdbcDetails=new JdbcUserDetailsManager(ds);
 
         jdbcDetails.setUsersByUsernameQuery(
-                "SELECT u.email, u.password, U.estado " +
-                        "FROM Usuarios u " +
-                        "WHERE u.email = ? AND u.estado = 1"
+                "SELECT u.email, u.password, \n" +
+                        "       CASE \n" +
+                        "           WHEN u.estado = 'activo' THEN TRUE\n" +
+                        "           ELSE FALSE\n" +
+                        "       END AS estado\n" +
+                        "FROM Usuarios u \n" +
+                        "WHERE u.email = ? AND u.estado = 'activo'"
         );
 
         jdbcDetails.setAuthoritiesByUsernameQuery(
@@ -73,6 +86,7 @@ public class SecurityConfig {
                         "INNER JOIN Roles r ON ur.role_id = r.role_id " +
                         "WHERE u.email = ?"
         );
+
 
 
         printUsers(ds);
