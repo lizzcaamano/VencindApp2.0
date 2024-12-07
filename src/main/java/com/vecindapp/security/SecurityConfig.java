@@ -47,7 +47,7 @@ public class SecurityConfig {
                                 //.requestMatchers(HttpMethod.GET,"/trabajador/all").hasRole("ADMINISTRADOR")
                                 //.requestMatchers(HttpMethod.GET,"/**").authenticated()
                                 .requestMatchers(HttpMethod.POST, "/login").permitAll()// Permite el acceso al login sin autenticación
-                                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+                                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "vecindapi-docs/**", "/swagger-ui.html", "/swagger-resources/*", "/vecindapi-docs", "/swagger-ui-vecindapi.html", "/swagger-ui/index.html").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/**").authenticated() // Protege todas las demás rutas POST
                                 .requestMatchers(HttpMethod.GET, "/**").authenticated()  // Protege todas las rutas GET
                                 .anyRequest().permitAll()
