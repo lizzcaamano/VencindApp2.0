@@ -3,10 +3,7 @@ package com.vecindapp.service;
 import com.vecindapp.entity.*;
 import com.vecindapp.repository.dao.IUsuarioDAO;
 import com.vecindapp.repository.dao.IUsuarioRolDAO;
-import com.vecindapp.repository.dto.ClienteDTO;
-import com.vecindapp.repository.dto.IClienteMapper;
-import com.vecindapp.repository.dto.UbicacionDTO;
-import com.vecindapp.repository.dto.UsuarioDTO;
+import com.vecindapp.repository.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -151,4 +148,16 @@ public class ClienteService implements IClienteService {
                     .collect(Collectors.toList());
 
             }
+
+    @Override
+    public ClienteDTO updateByEstado(int id, String estado) {
+        int actualizo = userDAO.updateByEstado(id, estado);
+
+        if (actualizo > 0) {
+            //Traer al trabajador actualizado
+            Usuario cliente = userDAO.findById(id);
+            return climap.toDto(cliente);
+        }
+        return null ;
+    }
 }

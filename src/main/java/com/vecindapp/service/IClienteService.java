@@ -2,6 +2,7 @@ package com.vecindapp.service;
 
 import com.vecindapp.entity.Usuario;
 import com.vecindapp.repository.dto.ClienteDTO;
+import com.vecindapp.repository.dto.TrabajadorDTO;
 import com.vecindapp.repository.dto.UsuarioDTO;
 
 import java.util.List;
@@ -15,5 +16,5 @@ public interface IClienteService {
     //CONSULTAS ADICIONALES
     public List<ClienteDTO> findByNombre(String nombre);
     //public List<Usuario> findByCalificacion(Calificacion calificaciones);
-    //public Usuario updateByEstado(String estado);
+    public ClienteDTO updateByEstado(int id, String estado);
 }
