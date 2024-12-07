@@ -47,7 +47,7 @@ public class UsuarioDAO implements IUsuarioDAO{
     }
 
     @Override
-    public String updateByEstado( int id, String estado) {
+    public int updateByEstado( int id, String estado) {
         return usujpa.updateEstado(id, estado);
     }
 

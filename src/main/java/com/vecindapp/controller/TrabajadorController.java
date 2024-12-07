@@ -5,6 +5,7 @@ import com.vecindapp.repository.dto.ClienteDTO;
 import com.vecindapp.repository.dto.TrabajadorDTO;
 import com.vecindapp.service.IClienteService;
 import com.vecindapp.service.ITrabajadorService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,12 +26,12 @@ public class TrabajadorController {
     }
 
     @GetMapping("single")
-    public TrabajadorDTO Cliente(@RequestParam("id") int id) {
+    public TrabajadorDTO TrabajadorById(@RequestParam("id") int id) {
         return traService.findById(id);
     }
 
     @GetMapping("byname")
-    public List<TrabajadorDTO> Cliente(@RequestParam("name") String name) {
+    public List<TrabajadorDTO> TrabajadorByName(@RequestParam("name") String name) {
         return traService.findByNombre(name);
     }
 
@@ -44,6 +45,12 @@ public class TrabajadorController {
     public TrabajadorDTO Upd(@RequestParam("id") Integer id, @RequestBody TrabajadorDTO trabajadordto) {
 
         return traService.updateTrabajador(id, trabajadordto);
+    }
+
+    @PatchMapping("upde")
+    public TrabajadorDTO EstadoTrabajador(@RequestParam("id") int id, @RequestParam("estado") String estado){
+
+        return traService.updateByEstado(id, estado);
     }
 
 

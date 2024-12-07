@@ -23,10 +23,12 @@ public interface IUsuarioJPA extends JpaRepository<Usuario, Integer> {
     //public List<Usuario> findByCalificacion(Calificacion calificaciones);
 
     // Modificar Estado
+
     @Modifying
     @Transactional
     @Query("UPDATE Usuario u SET u.estado = :estado WHERE u.id = :id")
-    public String updateEstado(@Param("id") Integer id, @Param("estado") String estado);
+    //Int porque devuelve la respuesta de la consulta (si fue exitosa 1 sino 0)
+    public int updateEstado(@Param("id") Integer id, @Param("estado") String estado);
 
 
 

@@ -14,5 +14,6 @@ public interface ITrabajadorService {
     //CONSULTAS ADICIONALES
     public List<TrabajadorDTO> findByNombre(String nombre);
     //public List<Usuario> findByCalificacion(Calificacion calificaciones);
-    //public Usuario updateByEstado(String estado);
+    public TrabajadorDTO updateByEstado(int id,String estado);
+
 }

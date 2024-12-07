@@ -55,6 +55,8 @@ public class TrabajadorService implements ITrabajadorService {
     public List<TrabajadorDTO> insertTrabajador(TrabajadorDTO trabajadordto) {
         Usuario trabajador = tramap.toEntity(trabajadordto);
 
+        //Estado por defecto al crear el trabajador debe ser "pediente"
+        trabajador.setEstado("pendiente");
         //Para crear ubicacion
         Barrio barrio = new Barrio();
         barrio.setNombreBarrio(trabajadordto.getNombreBarrio());
@@ -139,7 +141,7 @@ public class TrabajadorService implements ITrabajadorService {
         return tramap.toDto(traSingle);
     }
 
-    @Override
+            @Override
             public List<TrabajadorDTO> findByNombre(String nombre) {
                 List<TrabajadorDTO> trabajadores = ListTrabajadores();
 
@@ -151,4 +153,18 @@ public class TrabajadorService implements ITrabajadorService {
                     .collect(Collectors.toList());
 
             }
+
+    @Override
+    public TrabajadorDTO updateByEstado(int id, String estado) {
+       int actualizo = userDAO.updateByEstado(id, estado);
+
+       if (actualizo > 0) {
+           //Traer al trabajador actualizado
+           Usuario trabajador = userDAO.findById(id);
+           return tramap.toDto(trabajador);
+       }
+        return null ;
+    }
+
+
 }
