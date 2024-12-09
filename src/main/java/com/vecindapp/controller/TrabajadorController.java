@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("trabajador")
-@CrossOrigin("*")
+
 public class TrabajadorController {
 
     @Autowired

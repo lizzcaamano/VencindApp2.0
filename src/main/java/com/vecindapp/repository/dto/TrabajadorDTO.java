@@ -1,6 +1,7 @@
 package com.vecindapp.repository.dto;
 
 import java.time.Instant;
+import java.util.List;
 
 //Heredamos de UsuarioDTO sus atributos y métodos
 public class TrabajadorDTO {
@@ -23,6 +24,8 @@ public class TrabajadorDTO {
     private String nombreBarrio;
     private String nombreLocalidad;
     private String nombreCiudad;
+    private List<String> archivoDocumento;
+    private List<String> tipoDocumento;
 
 
     public Integer getId() {

@@ -1,8 +1,11 @@
 package com.vecindapp.controller;
 
 import com.vecindapp.utils.JwtResponse;
+import com.vecindapp.utils.LoginRequest;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static com.vecindapp.utils.Tools.*;
 
@@ -22,8 +22,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "*")
-@RestController("login")
+
+
+@RestController
 public class LoginController {
     AuthenticationManager authManager;
 
@@ -32,9 +33,12 @@ public class LoginController {
         this.authManager = authManager;
     }
     @PostMapping(value = "login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<JwtResponse> login(@RequestParam("user") String user,
-                                             @RequestParam("pwd") String pwd) {
+    public ResponseEntity<JwtResponse> login(@RequestBody LoginRequest loginRequest) {
         try {
+            // Accede a los parámetros desde el objeto loginRequest
+            String user = loginRequest.getUser();
+            String pwd = loginRequest.getPwd();
+
             // Autenticar al usuario
             Authentication authentication = authManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user, pwd)

@@ -20,6 +20,9 @@ public interface ITrabajadorMapper {
     @Mapping(target = "nombreBarrio", source = "ubicacion.barrio.nombreBarrio")
     @Mapping(target = "nombreLocalidad", source = "ubicacion.barrio.localidad.nombreLocalidad")
     @Mapping(target = "nombreCiudad", source = "ubicacion.barrio.localidad.ciudad.nombreCiudad")
+    //@Mapping(target = "archivoDocumento", source = "documento.tipodocumento.nombretip")
+    //@Mapping(target = "archivoDocumento", source = "documentos[0].archivoUrl")  // URL del archivo
+    //@Mapping(target = "tipoDocumento", source = "documentos[0].tipoDocumento.nombre")  // Nombre del tipo de documento
     TrabajadorDTO toDto(Usuario trabajador);
 
     // DTO a Entity
@@ -28,6 +31,8 @@ public interface ITrabajadorMapper {
     @Mapping(target = "ubicacion.barrio.nombreBarrio", source = "nombreBarrio")
     @Mapping(target = "ubicacion.barrio.localidad.nombreLocalidad", source = "nombreLocalidad")
     @Mapping(target = "ubicacion.barrio.localidad.ciudad.nombreCiudad", source = "nombreCiudad")
+    //@Mapping(target = "documentos[0].archivoUrl", source = "archivoDocumento")  // Mapeo de la URL al campo del documento
+    //@Mapping(target = "documentos[0].tipoDocumento.nombre", source = "tipoDocumento")  // Mapeo del nombre del tipo de documento
     Usuario toEntity(TrabajadorDTO trabajadorDTO);
 
     default List<UsuarioRol> mapRolIdToUsuarioRols(Integer rolId) {

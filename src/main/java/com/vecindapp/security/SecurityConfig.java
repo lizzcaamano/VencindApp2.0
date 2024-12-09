@@ -48,8 +48,10 @@ public class SecurityConfig {
                                 //.requestMatchers(HttpMethod.GET,"/**").authenticated()
                                 .requestMatchers(HttpMethod.POST, "/login").permitAll()// Permite el acceso al login sin autenticación
                                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "vecindapi-docs/**", "/swagger-ui.html", "/swagger-resources/*", "/vecindapi-docs", "/swagger-ui-vecindapi.html", "/swagger-ui/index.html").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/**").authenticated() // Protege todas las demás rutas POST
-                                .requestMatchers(HttpMethod.GET, "/**").authenticated()  // Protege todas las rutas GET
+                                .requestMatchers(HttpMethod.POST, "/**").permitAll() // Protege todas las demás rutas POST
+                                .requestMatchers(HttpMethod.GET, "/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/{id}/mensajes").authenticated()
+                                .requestMatchers("/chat-socket/**", "/{chatId}/mensajes", "/chats/crearChat").authenticated() // Protege todas las rutas GET
                                 .anyRequest().permitAll()
                 )
                 .addFilter(new AuthorizationFilterJWT(auth));
