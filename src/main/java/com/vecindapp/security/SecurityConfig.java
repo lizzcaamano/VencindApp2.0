@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -22,6 +23,11 @@ import java.util.Map;
 @Configuration
 public class SecurityConfig {
     AuthenticationManager auth;
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     //bean Convierte el método en un objeto
     @Bean
@@ -55,6 +61,7 @@ public class SecurityConfig {
                                 .anyRequest().permitAll()
                 )
                 .addFilter(new AuthorizationFilterJWT(auth));
+        System.out.println("Verificando el auth" + auth);
 
         return http.build();
 

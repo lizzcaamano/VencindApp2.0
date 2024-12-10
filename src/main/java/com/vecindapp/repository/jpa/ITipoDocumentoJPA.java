@@ -4,4 +4,5 @@ import com.vecindapp.entity.Tipodocumento;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ITipoDocumentoJPA extends JpaRepository <Tipodocumento, Integer>{
+    public Tipodocumento findByNombre(String nombre);
 }

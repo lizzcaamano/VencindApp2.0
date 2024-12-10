@@ -8,10 +8,12 @@ import com.vecindapp.repository.dto.IClienteMapper;
 import com.vecindapp.repository.dto.ITrabajadorMapper;
 import com.vecindapp.repository.dto.TrabajadorDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -27,6 +29,11 @@ public class TrabajadorService implements ITrabajadorService {
 
     @Autowired
     IUbicacionService ubiservice;
+    @Autowired
+    IDocumentoService docservice;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
 
     @Override
@@ -53,9 +60,19 @@ public class TrabajadorService implements ITrabajadorService {
     @Override
     @Transactional
     public List<TrabajadorDTO> insertTrabajador(TrabajadorDTO trabajadordto) {
+
+        Optional<Usuario> emailExists = userDAO.findByEmail(trabajadordto.getEmail());
+        if (emailExists.isPresent()) {
+            throw new RuntimeException("El correo ya existe, intente iniciar sesión");
+        }
+
+        // Hashear la contraseña antes de guardar
+        trabajadordto.setPassword(passwordEncoder.encode(trabajadordto.getPassword()));
+
         Usuario trabajador = tramap.toEntity(trabajadordto);
 
-        //Estado por defecto al crear el trabajador debe ser "pediente"
+
+        //Estado por defecto al crear el trabajador debe ser "pendiente"
         trabajador.setEstado("pendiente");
         //Para crear ubicacion
         Barrio barrio = new Barrio();
@@ -93,6 +110,14 @@ public class TrabajadorService implements ITrabajadorService {
 
         usrolDAO.insertUsuarioRol(usuarioRol);
 
+        // Crear y asociar documentos
+        List<Documento> documentos = tramap.mapDocumentos(trabajadordto);
+        for (Documento documento : documentos) {
+            documento.setUser(trabajador);  // Asociar el trabajador al documento
+            // Guardar documento
+            docservice.guardarDoc(documento);
+        }
+
         tramap.toDto(trabajador);
 
         return ListTrabajadores();
@@ -102,6 +127,11 @@ public class TrabajadorService implements ITrabajadorService {
     public TrabajadorDTO updateTrabajador(Integer id, TrabajadorDTO trabajadordto) {
         Usuario trabajador = tramap.toEntity(trabajadordto);
         Usuario traSingle = userDAO.findById(id);
+
+        // Actualizar solo la contraseña si es nueva
+        if (trabajadordto.getPassword() != null && !trabajadordto.getPassword().isEmpty()) {
+            traSingle.setPassword(passwordEncoder.encode(trabajadordto.getPassword()));
+        }
 
         // Actualizar los campos del usuario
         traSingle.setNombre(trabajadordto.getNombre());
@@ -151,7 +181,6 @@ public class TrabajadorService implements ITrabajadorService {
                     .filter(trabajador -> trabajador.getNombre() != null &&
                             trabajador.getNombre().toLowerCase().startsWith(nombre.toLowerCase()))
                     .collect(Collectors.toList());
-
             }
 
     @Override
@@ -165,6 +194,8 @@ public class TrabajadorService implements ITrabajadorService {
        }
         return null ;
     }
+
+
 
 
 }

@@ -24,7 +24,6 @@ import java.time.Instant;
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
 public class WebSocketController {
 
     @Autowired
@@ -55,30 +54,35 @@ public class WebSocketController {
     AuthService authService;
 
 
+    @GetMapping("/user-info")
+    public String getUserInfo() {
+        // Obtén la autenticación del contexto de seguridad
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null) {
+            // Accede a los detalles del usuario autenticado
+            String username = authentication.getName(); // Nombre de usuario
+            return "Usuario autenticado: " + username;
+        } else {
+            return "No se ha encontrado autenticación";}
+    }
+
+
     @MessageMapping("/chat/{roomId}/send") // Cliente envía a /app/chat/{roomId}/send
     @SendTo("/topic/room/{roomId}") // Este mensaje será enviado a todos los suscriptores de /topic/room/{roomId}
     public MensajeDTO enviarMensaje(@DestinationVariable String roomId, MensajeDTO mensajeDTO) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.isAuthenticated()) {
-            String username = authentication.getName();
-        }
-        // Obtener el usuario autenticado
-        Usuario usuarioAutenticado = authService.obtenerUsuarioActual();
-        System.out.println(usuarioAutenticado);
 
-        if (usuarioAutenticado == null) {
-            throw new RuntimeException("Usuario no autenticado");
+        if (authentication != null) {
+            // Accede a los detalles del usuario autenticado
+            String username = authentication.getName(); // Nombre de usuario
+            System.out.println("Usuario autenticado: " + username);
+        } else {
+            System.out.println("No se ha encontrado autenticación");
         }
 
-        // Lógica para determinar el rol del usuario (cliente o trabajador)
-        String rol = "trabajador";  // Valor predeterminado
-        if (usuarioAutenticado.getUsuarioRols().stream()
-                .anyMatch(rolUsuario -> rolUsuario.getRole().getNombre().equalsIgnoreCase("CLIENTE"))) {
-            rol = "cliente";  // Si el usuario tiene el rol CLIENTE
-        }
 
-        System.out.println("Rol asignado: " + rol);
 
         // Validar que el roomId corresponde a un chat existente
         if (chatDAO.findChatByRoomId((roomId)) == null) {

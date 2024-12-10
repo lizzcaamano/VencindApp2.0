@@ -1,15 +1,21 @@
 package com.vecindapp.controller;
 
 
-import com.vecindapp.repository.dto.ClienteDTO;
+import com.vecindapp.entity.Usuario;
 import com.vecindapp.repository.dto.TrabajadorDTO;
-import com.vecindapp.service.IClienteService;
 import com.vecindapp.service.ITrabajadorService;
-import jakarta.websocket.server.PathParam;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -34,6 +40,7 @@ public class TrabajadorController {
     public List<TrabajadorDTO> TrabajadorByName(@RequestParam("name") String name) {
         return traService.findByNombre(name);
     }
+
 
     @PostMapping("add")
     public List<TrabajadorDTO> Add(@RequestBody TrabajadorDTO trabajadorDTO) {

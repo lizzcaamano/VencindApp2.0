@@ -1,4 +1,4 @@
-package com.vecindapp.repository.dao;
+package com.vecindapp.service;
 
 import com.vecindapp.entity.Documento;
 import com.vecindapp.entity.Tipodocumento;
@@ -6,7 +6,7 @@ import com.vecindapp.entity.Usuario;
 
 import java.util.List;
 
-public interface IDocumentoDAO {
+public interface IDocumentoService {
     public List<Documento> guardarDoc(Documento documento);
     public Documento actualizarDoc(Documento documento);
     public List<Documento> buscarDocumentos();

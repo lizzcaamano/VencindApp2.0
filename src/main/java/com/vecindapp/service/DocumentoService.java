@@ -1,51 +1,54 @@
-package com.vecindapp.repository.dao;
+package com.vecindapp.service;
 
 import com.vecindapp.entity.Documento;
 import com.vecindapp.entity.Tipodocumento;
 import com.vecindapp.entity.Usuario;
-import com.vecindapp.repository.jpa.IDocumentoJPA;
+import com.vecindapp.repository.dao.IDocumentoDAO;
+import com.vecindapp.repository.dao.ITipoDocumentoDAO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaContext;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Repository
-public class DocumentoDAO implements IDocumentoDAO{
+@Service
+public class DocumentoService implements IDocumentoService {
 
     @Autowired
-    IDocumentoJPA docjpa;
+    IDocumentoDAO docdao;
+
     @Autowired
-    private JpaContext jpaContext;
+    ITipoDocumentoDAO tipodao;
 
     @Override
     public List<Documento> guardarDoc(Documento documento) {
-        docjpa.save(documento);
-        return buscarDocumentos();
+        Tipodocumento tipodocumento = tipodao.findByNombre(documento.getTipoDocumento().getNombre());
+        documento.setTipoDocumento(tipodocumento);
+        docdao.guardarDoc(documento);
+        return ListarDocumentos();
     }
 
     @Override
     public Documento actualizarDoc(Documento documento) {
-        return docjpa.save(documento);
+        return null;
     }
 
     @Override
     public List<Documento> buscarDocumentos() {
-        return docjpa.findAll();
+        return List.of();
     }
 
     @Override
     public List<Documento> ListarDocumentos() {
-        return docjpa.findAll();
+        return docdao.ListarDocumentos();
     }
 
     @Override
     public List<Documento> findByUsuario(Usuario User) {
-        return docjpa.findByUsuario(User);
+        return List.of();
     }
 
     @Override
     public List<Documento> findByTipoDocumento(Tipodocumento TipoDoc) {
-        return docjpa.findByTipoDocumento(TipoDoc);
+        return List.of();
     }
 }

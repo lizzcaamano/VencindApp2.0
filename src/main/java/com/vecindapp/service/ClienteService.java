@@ -5,10 +5,12 @@ import com.vecindapp.repository.dao.IUsuarioDAO;
 import com.vecindapp.repository.dao.IUsuarioRolDAO;
 import com.vecindapp.repository.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -25,11 +27,13 @@ public class ClienteService implements IClienteService {
     @Autowired
     IUbicacionService ubiservice;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
 
     @Override
     public ClienteDTO findById(int id) {
         Usuario user = userDAO.findById(id);
-
         return climap.toDto(user);
     }
 
@@ -50,6 +54,15 @@ public class ClienteService implements IClienteService {
     @Override
     @Transactional
     public List<ClienteDTO> insertCliente(ClienteDTO clientedto) {
+
+        Optional<Usuario> emailExists = userDAO.findByEmail(clientedto.getEmail());
+        if (emailExists.isPresent()) {
+            throw new RuntimeException("El correo ya existe, intente iniciar sesión");
+        }
+
+        // Hashear la contraseña antes de guardar
+        clientedto.setPassword(passwordEncoder.encode(clientedto.getPassword()));
+
         Usuario cliente = climap.toEntity(clientedto);
 
         //Para crear ubicacion
@@ -97,6 +110,11 @@ public class ClienteService implements IClienteService {
     public ClienteDTO updateCliente(Integer id, ClienteDTO clientedto) {
         Usuario cliente = climap.toEntity(clientedto);
         Usuario cliSingle = userDAO.findById(id);
+
+        // Actualizar solo la contraseña si es nueva
+        if (clientedto.getPassword() != null && !clientedto.getPassword().isEmpty()) {
+            cliSingle.setPassword(passwordEncoder.encode(clientedto.getPassword()));
+        }
 
         // Actualizar los campos del usuario
         cliSingle.setNombre(clientedto.getNombre());

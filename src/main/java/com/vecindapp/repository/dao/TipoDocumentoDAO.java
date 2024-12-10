@@ -17,4 +17,9 @@ public class TipoDocumentoDAO implements ITipoDocumentoDAO {
     public List<Tipodocumento> buscarTipoDocumento() {
         return tipdocjpa.findAll();
     }
+
+    @Override
+    public Tipodocumento findByNombre(String nombre) {
+        return tipdocjpa.findByNombre(nombre);
+    }
 }

@@ -7,9 +7,9 @@ import jakarta.validation.constraints.Size;
 
 import java.time.Instant;
 
-//Heredamos de UsuarioDTO sus atributos y métodos
-public class ClienteDTO{
+public class AdministradorDTO {
 
+    //Atributos propios de la entidad Usuario
     // Atributos propios de la entidad Usuario
     @NotNull(message = "El ID no puede ser nulo")
     private Integer id;
@@ -21,6 +21,7 @@ public class ClienteDTO{
 
     @NotNull(message = "El correo electrónico no puede ser nulo")
     @Email(message = "El correo electrónico debe ser válido")
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@vecindapp\\.com$", message = "El correo electrónico debe pertenecer a 'vecindapp.com'")
     private String email;
 
     @NotNull(message = "La contraseña no puede ser nula")
@@ -31,33 +32,15 @@ public class ClienteDTO{
     @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "El teléfono debe ser un número válido (10-15 dígitos)")
     private String telefono;
 
-    @Size(max = 255, message = "La descripción no debe exceder los 255 caracteres")
-    private String descripcion;
-
-    @Size(max = 255, message = "La foto no debe exceder los 255 caracteres")
-    private String foto;
-
     private Instant fechaRegistro;
 
     @NotNull(message = "El estado no puede ser nulo")
-    @Pattern(regexp = "^(activo|inactivo|suspendido|pendiente)$", message = "El estado es invalido")    private String estado;
+    @Pattern(regexp = "^(activo|inactivo|suspendido|pendiente)$", message = "El estado es invalido")
+    private String estado;
 
-    // Atributos referentes a relaciones que tiene Usuario
+    //Atributos referentes a relaciones que tiene Usuario
     @NotNull(message = "El ID del rol no puede ser nulo")
     private Integer rolId;
-
-    @Size(max = 255, message = "La dirección de ubicación no debe exceder los 255 caracteres")
-    private String ubicaciondir;
-
-    @Size(max = 100, message = "El nombre del barrio no debe exceder los 100 caracteres")
-    private String nombreBarrio;
-
-    @Size(max = 100, message = "El nombre de la localidad no debe exceder los 100 caracteres")
-    private String nombreLocalidad;
-
-    @Size(max = 100, message = "El nombre de la ciudad no debe exceder los 100 caracteres")
-    private String nombreCiudad;
-
 
     public Integer getId() {
         return id;
@@ -99,22 +82,6 @@ public class ClienteDTO{
         this.telefono = telefono;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
     public Instant getFechaRegistro() {
         return fechaRegistro;
     }
@@ -136,40 +103,6 @@ public class ClienteDTO{
     }
 
     public void setRolId(Integer rolId) {
-        this.rolId = 3;
+        this.rolId = 1;
     }
-
-    public String getUbicaciondir() {
-        return ubicaciondir;
-    }
-
-    public void setUbicaciondir(String ubicaciondir) {
-        this.ubicaciondir = ubicaciondir;
-    }
-
-    public String getNombreBarrio() {
-        return nombreBarrio;
-    }
-
-    public void setNombreBarrio(String nombreBarrio) {
-        this.nombreBarrio = nombreBarrio;
-    }
-
-    public String getNombreCiudad() {
-        return nombreCiudad;
-    }
-
-    public void setNombreCiudad(String nombreCiudad) {
-        this.nombreCiudad = nombreCiudad;
-    }
-
-    public String getNombreLocalidad() {
-        return nombreLocalidad;
-    }
-
-    public void setNombreLocalidad(String nombreLocalidad) {
-        this.nombreLocalidad = nombreLocalidad;
-    }
-
-
 }
