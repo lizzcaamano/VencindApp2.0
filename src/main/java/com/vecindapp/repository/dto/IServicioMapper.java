@@ -8,7 +8,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface IServicioMapper {
 
-    IServicioMapper mapper = Mappers.getMapper(IServicioMapper.class);
 
     @Mapping(target = "categoriaName", source = "categoria.nombre")
     ServicioDTO toDTO(Servicio servicio);

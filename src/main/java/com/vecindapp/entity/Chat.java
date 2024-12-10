@@ -28,8 +28,10 @@ public class Chat {
     @JoinColumn(name = "trabajador_id")
     private Usuario trabajador;
 
-    @Column(name = "servicio_id")
-    private Integer servicioId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "servicio_id")
+    private Servicio servicio;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "fecha_inicio")
@@ -62,12 +64,12 @@ public class Chat {
         this.trabajador = trabajador;
     }
 
-    public Integer getServicioId() {
-        return servicioId;
+    public Servicio getServicio() {
+        return servicio;
     }
 
-    public void setServicioId(Integer servicioId) {
-        this.servicioId = servicioId;
+    public void setServicio(Servicio servicio) {
+        this.servicio = servicio;
     }
 
     public Instant getFechaInicio() {

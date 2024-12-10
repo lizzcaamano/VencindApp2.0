@@ -8,6 +8,11 @@ public class MensajeDTO {
     private String contenido;
     private Instant fechaEnvio;
     private Integer chatId;
+    private String senderRole;
+    private String remitente;
+    private Double price;
+    private Boolean esSolicitudPrecio;
+    private Integer reservaId;
 
     // Getters y Setters
     public Integer getId() {
@@ -40,5 +45,45 @@ public class MensajeDTO {
 
     public void setChatId(Integer chatId) {
         this.chatId = chatId;
+    }
+
+    public String getSenderRole() {
+        return senderRole;
+    }
+
+    public void setSenderRole(String senderRole) {
+        this.senderRole = senderRole;
+    }
+
+    public String getRemitente() {
+        return remitente;
+    }
+
+    public void setRemitente(String remitente) {
+        this.remitente = remitente;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Boolean getEsSolicitudPrecio() {
+        return esSolicitudPrecio;
+    }
+
+    public void setEsSolicitudPrecio(Boolean esSolicitudPrecio) {
+        this.esSolicitudPrecio = esSolicitudPrecio;
+    }
+
+    public Integer getReservaId() {
+        return reservaId;
+    }
+
+    public void setReservaId(Integer reservaId) {
+        this.reservaId = reservaId;
     }
 }

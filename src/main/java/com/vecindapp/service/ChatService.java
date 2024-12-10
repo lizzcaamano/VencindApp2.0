@@ -1,6 +1,7 @@
 package com.vecindapp.service;
 
 import com.vecindapp.entity.Chat;
+import com.vecindapp.entity.Servicio;
 import com.vecindapp.entity.Usuario;
 import com.vecindapp.repository.dao.IChatDAO;
 import com.vecindapp.repository.dao.IServicioDAO;
@@ -26,6 +27,9 @@ public class ChatService implements IChatService{
 
     @Autowired
     IUsuarioDAO usuarioDAO;
+
+    @Autowired
+    IServicioDAO servicioDAO;
 
     @Autowired
     IChatMapper chatMapper;
@@ -62,6 +66,7 @@ public class ChatService implements IChatService{
 
         Usuario cliente = usuarioDAO.findById(usuarioId);
         Usuario trabajador = usuarioDAO.findById(trabajadorId);
+        Servicio servicio = servicioDAO.findIdServicio(servicioId);
 
         // Generar roomId único
         String roomId = UUID.randomUUID().toString();
@@ -70,7 +75,7 @@ public class ChatService implements IChatService{
         Chat chat = new Chat();
         chat.setUsuario(cliente);
         chat.setTrabajador(trabajador);
-        chat.setServicioId(servicioId);
+        chat.setServicio(servicio);
         chat.setRoomId(roomId);
         chat.setFechaInicio(Instant.now());
 

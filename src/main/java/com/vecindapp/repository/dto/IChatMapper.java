@@ -17,7 +17,7 @@ public interface IChatMapper {
     @Mapping(source = "trabajador.nombre", target = "trabajadorNombre")
     @Mapping(source = "id", target = "chatId")
     @Mapping(source = "roomId", target = "roomId")
-    @Mapping(source = "servicioId", target = "servicioId")
+    @Mapping(source = "servicio.id", target = "servicioId")
     @Mapping(source = "fechaInicio", target = "fechaInicio")
     ChatDTO toDTO(Chat chat);
 
@@ -26,7 +26,7 @@ public interface IChatMapper {
     @Mapping(source = "trabajadorId", target = "trabajador.id")
     @Mapping(source = "chatId", target = "id")
     @Mapping(source = "roomId", target = "roomId")
-    @Mapping(source = "servicioId", target = "servicioId")
+    @Mapping(source = "servicioId", target = "servicio.id")
     @Mapping(source = "fechaInicio", target = "fechaInicio")
     Chat toEntity(ChatDTO chatDTO);
 
