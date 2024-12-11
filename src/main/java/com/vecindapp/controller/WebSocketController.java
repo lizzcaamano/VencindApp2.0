@@ -47,12 +47,6 @@ public class WebSocketController {
     @Autowired
     IReservaMapper reservaMapper;
 
-    @Autowired
-    IMensajeMapper mensajeMapper;
-
-    @Autowired
-    AuthService authService;
-
 
     @GetMapping("/user-info")
     public String getUserInfo() {

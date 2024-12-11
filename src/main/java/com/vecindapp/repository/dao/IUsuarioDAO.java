@@ -19,7 +19,7 @@ public interface IUsuarioDAO {
 
     //CONSULTAS ADICIONALES
     public List<Usuario> findByNombre(String nombre);
-    public Optional<Usuario> findByEmail(String email);
+    public Usuario findByEmail(String email);
     //public List<Usuario> findByCalificacion(Calificacion calificaciones);
     public int updateByEstado(int id,String estado);
 

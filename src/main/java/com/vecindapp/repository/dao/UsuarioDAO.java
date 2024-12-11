@@ -42,8 +42,8 @@ public class UsuarioDAO implements IUsuarioDAO{
     }
 
     @Override
-    public Optional<Usuario> findByEmail(String email) {
-        return usujpa.findByEmail(email);
+    public Usuario findByEmail(String email) {
+        return usujpa.findUsuarioByEmail(email);
     }
 
     @Override

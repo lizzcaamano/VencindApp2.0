@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface IRolDAO {
     public List<Rol> ListRoles();
-    public Rol findById(int id);
+    Rol findById(int id);
     public List<Rol> findByNombre(String nombre);
+    List<Integer> findRolByUsuarioId(int id);
 }

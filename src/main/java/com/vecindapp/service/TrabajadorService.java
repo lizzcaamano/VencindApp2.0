@@ -61,10 +61,7 @@ public class TrabajadorService implements ITrabajadorService {
     @Transactional
     public List<TrabajadorDTO> insertTrabajador(TrabajadorDTO trabajadordto) {
 
-        Optional<Usuario> emailExists = userDAO.findByEmail(trabajadordto.getEmail());
-        if (emailExists.isPresent()) {
-            throw new RuntimeException("El correo ya existe, intente iniciar sesión");
-        }
+        Usuario emailExists = userDAO.findByEmail(trabajadordto.getEmail());
 
         // Hashear la contraseña antes de guardar
         trabajadordto.setPassword(passwordEncoder.encode(trabajadordto.getPassword()));

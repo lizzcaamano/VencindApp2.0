@@ -16,7 +16,7 @@ public interface IUsuarioJPA extends JpaRepository<Usuario, Integer> {
     //Buscar usuario por Nombre
     public List<Usuario> findByNombre(String nombre);
 
-    public Optional<Usuario> findByEmail(String email);
+    Usuario findUsuarioByEmail(String email);
 
     //TODO: Revisar este metodo
     //Buscar Usuario por Calificación

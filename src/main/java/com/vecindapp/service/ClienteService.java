@@ -55,10 +55,8 @@ public class ClienteService implements IClienteService {
     @Transactional
     public List<ClienteDTO> insertCliente(ClienteDTO clientedto) {
 
-        Optional<Usuario> emailExists = userDAO.findByEmail(clientedto.getEmail());
-        if (emailExists.isPresent()) {
-            throw new RuntimeException("El correo ya existe, intente iniciar sesión");
-        }
+        Usuario emailExists = userDAO.findByEmail(clientedto.getEmail());
+
 
         // Hashear la contraseña antes de guardar
         clientedto.setPassword(passwordEncoder.encode(clientedto.getPassword()));

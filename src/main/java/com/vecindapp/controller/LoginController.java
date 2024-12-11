@@ -1,6 +1,8 @@
 package com.vecindapp.controller;
 
+import com.vecindapp.entity.Rol;
 import com.vecindapp.entity.Usuario;
+import com.vecindapp.repository.dao.RolDAO;
 import com.vecindapp.repository.dao.UsuarioDAO;
 import com.vecindapp.utils.JwtResponse;
 import com.vecindapp.utils.LoginRequest;
@@ -30,15 +32,19 @@ import java.util.stream.Collectors;
 
 @RestController
 public class LoginController {
+
     AuthenticationManager authManager;
     BCryptPasswordEncoder passwordEncoder;
     UsuarioDAO usuarioDAO;
+    RolDAO rolDAO;
 
-    public LoginController(AuthenticationManager authManager, BCryptPasswordEncoder passwordEncoder, UsuarioDAO usuarioDAO) {
+
+    public LoginController(AuthenticationManager authManager, BCryptPasswordEncoder passwordEncoder, UsuarioDAO usuarioDAO, RolDAO rolDAO) {
         super();
         this.authManager = authManager;
         this.passwordEncoder = passwordEncoder;
         this.usuarioDAO = usuarioDAO;
+        this.rolDAO = rolDAO;
     }
 
     @PostMapping(value = "/login-cliente", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -64,8 +70,11 @@ public class LoginController {
             String pwd = loginRequest.getPwd();
 
             // Recuperar el usuario directamente desde el repositorio
-            Usuario usuario = usuarioDAO.findByEmail(user)
-                    .orElseThrow(() -> new BadCredentialsException("Usuario no encontrado"));
+            Usuario usuario = usuarioDAO.findByEmail(user);
+
+            if(usuario == null){
+                new BadCredentialsException("Usuario no encontrado");
+            }
 
             // Validar manualmente la contraseña
             if (!passwordEncoder.matches(pwd, usuario.getPassword())) {
@@ -84,17 +93,26 @@ public class LoginController {
 
             if (!hasExpectedRole) {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                        .body(new JwtResponse("No tienes permisos para acceder con este rol."));
+                        .body(new JwtResponse("No tienes permisos para acceder con este rol.", 0, 0));
             }
 
             System.out.println("Usuario autenticado: " + authentication.getName());
             System.out.println("Autoridades: " + authentication.getAuthorities());
 
+
+            // Obtener el clientId (puedes obtenerlo desde el usuario autenticado)
+            Integer userId = getClientId(authentication.getName()); // Este es un ejemplo, debes implementar esta función
+
+            System.out.println(userId);
+
+            Integer rolId = getRolid(userId);
+            System.out.println(rolId);
+
             // Generar el token
-            String token = getToken(authentication);
+            String token = getToken(authentication, Long.valueOf(userId), rolId);
 
             // Retornar el token encapsulado en JwtResponse
-            return ResponseEntity.ok(new JwtResponse(token));
+            return ResponseEntity.ok(new JwtResponse(token, userId, rolId));
         } catch (AuthenticationException ex) {
             ex.printStackTrace();
             System.out.println("Error de autenticación: " + ex.getMessage());
@@ -102,7 +120,7 @@ public class LoginController {
         }
     }
 
-    private String getToken(Authentication authentication) {
+    private String getToken(Authentication authentication, Long userId, int rolId) {
         List<String> authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
@@ -113,9 +131,34 @@ public class LoginController {
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setSubject(authentication.getName())
                 .claim("authorities", authorities)
+                .claim("User_id", userId)
+                .claim("Role_id", rolId)
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 .signWith(Keys.hmacShaKeyFor(CLAVE.getBytes()))
                 .compact();
         return token;
+    }
+
+    private Integer getClientId(String email) {
+        // Busca el usuario por nombre
+        Usuario usuarios = usuarioDAO.findByEmail(email);
+
+        // Verifica si se encontró algún usuario
+        if (usuarios != null) {
+            // Si hay un usuario, retorna su clientId
+            return usuarios.getId(); // Aquí suponemos que el `id` es el `clientId`
+        }
+        // Si no se encontró el usuario, lanza una excepción o maneja el error
+        throw new RuntimeException("Usuario no encontrado");
+    }
+
+    private Integer getRolid(Integer id){
+        List<Integer> roles = rolDAO.findRolByUsuarioId(id);
+
+        if (roles != null) {
+            // Si hay un usuario, retorna su clientId
+            return roles.get(0);
+        }
+        throw new RuntimeException("rol no encontrado");
     }
 }

@@ -28,4 +28,9 @@ public class RolDAO implements IRolDAO {
         jpa.findByNombre(nombre);
         return ListRoles();
     }
+
+    @Override
+    public List<Integer> findRolByUsuarioId(int id) {
+        return jpa.findRoleIdsByUsuarioId(id);
+    }
 }

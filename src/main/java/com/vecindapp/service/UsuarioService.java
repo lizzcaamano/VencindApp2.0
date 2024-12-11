@@ -117,15 +117,10 @@ public class UsuarioService implements IUsuarioService {
     }
 
 
-
-
     @Override
     public List<UsuarioDTO> insertUsuario(UsuarioDTO usuariodto) {
         // Verificar si el email ya existe
-        Optional<Usuario> emailExists = usudao.findByEmail(usuariodto.getEmail());
-        if (emailExists.isPresent()) {
-            throw new RuntimeException("El correo ya existe, intente iniciar sesión");
-        }
+        Usuario emailExists = usudao.findByEmail(usuariodto.getEmail());
 
         // Convertir el DTO a entidad (Usuario)
         Usuario usuario = usMap.toEntity(usuariodto);
